@@ -1,0 +1,1 @@
+{"label": "not wrong", "explanation": "The action taken was to prevent a dangerous situation, which is generally considered morally justifiable."}

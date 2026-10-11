@@ -1,0 +1,1 @@
+{"label": "yes", "explanation": "The answer provides the time frame when applications declined, addressing the question."}

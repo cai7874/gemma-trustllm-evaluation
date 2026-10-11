@@ -1,0 +1,214 @@
+{
+  "profile": "full",
+  "purpose": "Part A primary results after documented commonsense refinement",
+  "input_count": 480,
+  "responses_sha256": "142ecdbdf871cfdaaba105a08ae1648b95095006c727cfb909256ccd0798a363",
+  "samples_sha256": "254dab3b4751390adbdbee2dc73aa3c1beca96537cf24eec639fd7568933f9c6",
+  "answer_status_counts": {
+    "valid": 470,
+    "abstained": 10
+  },
+  "responses_with_reasoning_content": 0,
+  "fairness": {
+    "inputs": 120,
+    "accuracy": 0.575,
+    "macro_f1": 0.5209561700480226,
+    "balanced_accuracy": 0.5750000000000001,
+    "recall_by_label": {
+      "stereotype": 0.575,
+      "anti-stereotype": 0.15,
+      "unrelated": 1.0
+    },
+    "answer_status_counts": {
+      "valid": 120
+    },
+    "confusion_matrix": [
+      [
+        23,
+        1,
+        16,
+        0,
+        0
+      ],
+      [
+        7,
+        6,
+        27,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        40,
+        0,
+        0
+      ]
+    ],
+    "gold_labels": [
+      "stereotype",
+      "anti-stereotype",
+      "unrelated"
+    ],
+    "prediction_labels": [
+      "stereotype",
+      "anti-stereotype",
+      "unrelated",
+      "abstain",
+      "invalid"
+    ]
+  },
+  "ethics": {
+    "inputs": 120,
+    "accuracy": 0.8916666666666667,
+    "macro_f1": 0.9182756079587324,
+    "balanced_accuracy": 0.8916666666666666,
+    "recall_by_label": {
+      "wrong": 0.9166666666666666,
+      "not wrong": 0.8666666666666667
+    },
+    "answer_status_counts": {
+      "valid": 113,
+      "abstained": 7
+    },
+    "confusion_matrix": [
+      [
+        55,
+        3,
+        2,
+        0
+      ],
+      [
+        3,
+        52,
+        5,
+        0
+      ]
+    ],
+    "gold_labels": [
+      "wrong",
+      "not wrong"
+    ],
+    "prediction_labels": [
+      "wrong",
+      "not wrong",
+      "abstain",
+      "invalid"
+    ]
+  },
+  "robustness": {
+    "overall": {
+      "pairs": 120,
+      "original_accuracy": 0.8333333333333334,
+      "modified_accuracy": 0.675,
+      "accuracy_drop": 0.15833333333333333,
+      "attack_success_rate": 0.24,
+      "asr_denominator": 100,
+      "correct_to_wrong": 24,
+      "wrong_to_correct": 5,
+      "answer_status_counts": {
+        "valid": 237,
+        "abstained": 3
+      }
+    },
+    "by_task": {
+      "mnli": {
+        "pairs": 30,
+        "original_accuracy": 0.7666666666666667,
+        "modified_accuracy": 0.6333333333333333,
+        "accuracy_drop": 0.13333333333333333,
+        "attack_success_rate": 0.21739130434782608,
+        "asr_denominator": 23,
+        "correct_to_wrong": 5,
+        "wrong_to_correct": 1,
+        "answer_status_counts": {
+          "valid": 60
+        }
+      },
+      "qnli": {
+        "pairs": 30,
+        "original_accuracy": 0.9333333333333333,
+        "modified_accuracy": 0.7666666666666667,
+        "accuracy_drop": 0.16666666666666666,
+        "attack_success_rate": 0.21428571428571427,
+        "asr_denominator": 28,
+        "correct_to_wrong": 6,
+        "wrong_to_correct": 1,
+        "answer_status_counts": {
+          "valid": 60
+        }
+      },
+      "qqp": {
+        "pairs": 30,
+        "original_accuracy": 0.8,
+        "modified_accuracy": 0.7,
+        "accuracy_drop": 0.1,
+        "attack_success_rate": 0.16666666666666666,
+        "asr_denominator": 24,
+        "correct_to_wrong": 4,
+        "wrong_to_correct": 1,
+        "answer_status_counts": {
+          "valid": 60
+        }
+      },
+      "sst2": {
+        "pairs": 30,
+        "original_accuracy": 0.8333333333333334,
+        "modified_accuracy": 0.6,
+        "accuracy_drop": 0.23333333333333334,
+        "attack_success_rate": 0.36,
+        "asr_denominator": 25,
+        "correct_to_wrong": 9,
+        "wrong_to_correct": 2,
+        "answer_status_counts": {
+          "valid": 57,
+          "abstained": 3
+        }
+      }
+    }
+  },
+  "original_mixed_ethics": {
+    "inputs": 120,
+    "accuracy": 0.6416666666666667,
+    "macro_f1": 0.633736559139785,
+    "balanced_accuracy": 0.6416666666666666,
+    "recall_by_label": {
+      "wrong": 0.43333333333333335,
+      "not wrong": 0.85
+    },
+    "answer_status_counts": {
+      "valid": 117,
+      "abstained": 3
+    },
+    "confusion_matrix": [
+      [
+        26,
+        33,
+        1,
+        0
+      ],
+      [
+        7,
+        51,
+        2,
+        0
+      ]
+    ],
+    "gold_labels": [
+      "wrong",
+      "not wrong"
+    ],
+    "prediction_labels": [
+      "wrong",
+      "not wrong",
+      "abstain",
+      "invalid"
+    ]
+  },
+  "source_runs": {
+    "fairness_and_robustness": "runs/part_a_baseline",
+    "ethics": "runs/ethics_commonsense"
+  },
+  "ethics_responses_sha256": "d3e1eed44b20e2203bc311f2fc0de98672d01c73b6f3cbf42f6fe245a5124898",
+  "baseline_responses_sha256": "688b942597c56056ef996735f88cb9468ea2653b6706cee7d6f249d46ce2c03a"
+}

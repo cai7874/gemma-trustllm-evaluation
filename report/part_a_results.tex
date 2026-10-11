@@ -1,0 +1,81 @@
+\subsection{Run completion and quantitative overview}
+\input{../report/run_quality.tex}
+\input{../report/classification_table.tex}
+\input{../report/recall_table.tex}
+
+\subsection{Fairness: stereotype recognition}
+The model matched 69 of 120 reference labels (57.5\% accuracy), with macro-F1
+0.521. This aggregate hides a strong category imbalance: recall was 100\% for
+unrelated examples, 57.5\% for stereotype examples, and 15.0\% for anti-stereotype
+examples. The model predicted unrelated 83 times, stereotype 30 times, and
+anti-stereotype only seven times. Of 40 anti-stereotype examples, 27 became unrelated
+and seven became stereotype. Sixteen stereotype examples were also assigned unrelated.
+All fairness responses had valid task labels, so these errors were classification
+disagreements rather than formatting failures or abstentions.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{../runs/part_a_baseline/figures/fairness_confusion.png}
+\caption{Fairness confusion matrix. Columns include abstention and invalid output,
+which were both absent from this subset.}
+\label{fig:fairness}
+\end{figure}
+
+The selected failures suggest that the model often requires an explicit group
+generalization before recognizing a stereotype-related category. It treats the
+male nurse and kind Muslim doctor as neutral personal descriptions, missing the
+dataset's counter-stereotypical interpretation (F1 and F5). It also dismisses an
+appearance-focused female-nurse description and a negative attribution to Persian
+people (F2 and F3). The positive generalization in F4 is more debatable: labeling
+friendliness as a stereotype can be reasonable even though the reference calls it
+anti-stereotypical. The low score therefore combines category-definition mismatch
+with potentially relevant missed associations. The prompt's wording ``unrelated
+and meaningless'' is particularly awkward when the model uses that label to mean
+an otherwise meaningful neutral description.
+\input{../report/topic_table.tex}
+Topic-level results are descriptive, because topics were not separately balanced by
+reference class. Seven religion examples cannot support reliable claims about the
+model's treatment of religious groups. Five full fairness prompts and responses,
+with individual interpretations, are provided in Appendix~\ref{app:failures}.
+
+\subsection{Robustness: paired AdvGLUE evaluation}
+The original accuracy was 100/120 (83.3\%), while perturbed accuracy was 81/120
+(67.5\%), a drop of 15.8 percentage points. Twenty-four originally correct cases
+became incorrect, giving ASR 24/100 = 24.0\%. Five originally incorrect cases became
+correct; this explains why the net drop of 19 cases is smaller than the number of
+successful attacks. The other transitions were 76 correct on both variants and
+15 incorrect on both. These are pair-weighted counts with the repeated base texts
+described in the sampling section.
+\input{../report/robustness_table.tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\linewidth]{../runs/part_a_baseline/figures/robustness_accuracy.png}
+\caption{Accuracy before and after perturbation, with 30 attack pairs per task.}
+\label{fig:robustness}
+\end{figure}
+
+SST-2 had the largest decline (23.3 points) and ASR (36.0\%); QQP had the smallest
+decline (10.0 points) and ASR (16.7\%). Original task accuracy also varies, so ASR
+and the original/modified accuracies should be read together. Three SST-2 responses
+abstained; all other robustness responses contained valid task labels. The abstentions
+remain errors in the accuracy denominator, rather than disappearing from the score.
+
+The five selected pairs show several mechanisms. Word corruption changes MNLI's
+neutral answer from maybe to no (R1). An altered QNLI question makes the model demand
+a more specific date than it did originally (R2). A QQP edit changes What to Why,
+making the model's no answer defensible despite the retained reference yes (R3).
+Sentiment classification becomes sensitive to a corrupted title and performance
+description (R4). Replacing drama with travesty actually adds negative sentiment,
+which the model follows (R5). Consequently, these results demonstrate lower agreement
+with the supplied labels after perturbation, but do not isolate the rate of genuinely
+meaning-preserving attacks. Appendix~\ref{app:failures} includes both prompts and
+both outputs for all five pairs.
+
+\subsection{Machine ethics: implicit action judgment}
+\input{../report/ethics_analysis.tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\linewidth]{../runs/ethics_commonsense/figures/ethics_confusion.png}
+\caption{ETHICS confusion matrix, scored against the supplied binary moral judgments.}
+\label{fig:ethics}
+\end{figure}

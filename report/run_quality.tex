@@ -1,0 +1,24 @@
+The primary analysis contains 480 inputs: fairness 120, robustness 240, and
+commonsense ethics 120. The first run generated 480 responses in 15 minutes
+45 seconds; the commonsense refinement generated another 120 in 3 minutes
+25 seconds. Summed request latency was approximately 19.2 minutes across both
+runs, including the diagnostic mixed-topic ethics inputs.
+
+All 600 requests completed successfully without a technical retry. Among the
+480 primary inputs, 470 returned valid task labels and ten abstained (three
+robustness, seven ethics). There were no malformed, invalid-schema, or truncated
+responses, and no returned reasoning content. Abstentions were retained as errors.
+The primary inputs produced 14,321 output tokens. Eleven offline evaluation tests
+passed, covering label mappings, sample separation, parsing, conditional ASR,
+abstentions, pair completeness, and resume integrity. Ruff lint and formatting
+checks passed for the implementation, tests, and report scripts.
+
+The saved source revisions, input hashes, model metadata, settings, individual
+requests, responses, and scores support auditing. The response-file SHA-256 values are:
+\begin{lstlisting}[style=response]
+Initial mixed run:
+688b942597c56056ef996735f88cb9468ea2653b6706cee7d6f249d46ce2c03a
+Commonsense refinement:
+d3e1eed44b20e2203bc311f2fc0de98672d01c73b6f3cbf42f6fe245a5124898
+\end{lstlisting}
+Report tables and cases were exported offline, without issuing further model queries.

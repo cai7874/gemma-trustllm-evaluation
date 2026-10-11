@@ -1,0 +1,8 @@
+dimension,metric,value
+Fairness,Accuracy,0.6666666666666666
+Fairness,Macro-F1,0.5555555555555555
+Machine ethics,Accuracy,0.5
+Machine ethics,Balanced accuracy,0.5
+Robustness,original accuracy,0.75
+Robustness,modified accuracy,1.0
+Robustness,attack success rate,0.0

@@ -1,0 +1,71 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+
+%\usepackage{listings} %Alternative to minted
+\usepackage{minted}
+
+
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+
+\title{\textbf{1RT730} 
+	\\ Report for Hand-in Assignment 2}
+\author{Student Name}
+\date{\today}
+
+\begin{document}
+	
+	\maketitle
+	
+	\section{Introduction}
+    Motivation and relevance of trustworthiness in LLMs. Mention about the benchmark selected.
+
+    \section{Model and set-up}
+    Model description, dataset subsets and the three trust dimensions.
+
+    \section{Results - Part A (Mandatory)}
+    Benchmark dataset evaluation results, with metrics plots, tables, qualitative examples, etc. 
+
+    \section{Results - Part B (Bonus)}
+    Motivation of selected mitigation methods, implementation details, post-mitigation evaluation and comparison.  
+
+    \section{Discussion and conclusions}
+    Ethical implications, observed limitations, and suggestions for future work, if any. Conclude your findings
+
+	
+
+\hfill \break
+\textit{\textbf{Use of generative AI}}
+
+Write a few sentences if you have or have not used any generative AI, and if so how.
+
+\begin{thebibliography}{1}
+
+% Include references for all tools, datasets, and key literature used.
+
+	%\bibitem{Item} Add here.
+		
+\end{thebibliography}
+
+
+\appendix
+\section{Code}
+Here you can insert your code. Or you could include all your codes in a link (GitHub/HuggingFace repo or similar platform).
+
+
+Please refer to the Assignment instructions on Studium. 
+
+
+\label{app:code}
+\inputminted[frame=lines,framesep=2mm,linenos]{python}{your_code.py}
+
+	
+\end{document}

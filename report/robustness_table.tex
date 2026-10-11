@@ -1,0 +1,13 @@
+\begin{table}[H]\centering\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Task & Pairs & Original & Modified & $\Delta$ (pp) & ASR & $a/o$\\
+\midrule
+MNLI & 30 & 76.7\% & 63.3\% & 13.3 & 21.7\% & 5/23\\
+QNLI & 30 & 93.3\% & 76.7\% & 16.7 & 21.4\% & 6/28\\
+QQP & 30 & 80.0\% & 70.0\% & 10.0 & 16.7\% & 4/24\\
+SST2 & 30 & 83.3\% & 60.0\% & 23.3 & 36.0\% & 9/25\\
+POOLED & 120 & 83.3\% & 67.5\% & 15.8 & 24.0\% & 24/100\\
+\bottomrule\end{tabular}
+\caption{Paired robustness results. Positive $\Delta$ means lower perturbed accuracy; $a/o$ gives successful attacks over originally correct cases.}
+\end{table}

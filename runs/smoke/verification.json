@@ -1,0 +1,27 @@
+{
+  "verified_at": "2026-10-11T05:58:45.581192+00:00",
+  "scope": "Development smoke test only. The formal Part A experiment was not run.",
+  "huggingface": "All three files successfully downloaded from the pinned revision after access was granted.",
+  "model_id": "google/gemma-4-e4b",
+  "model_format": "mlx",
+  "quantization": "4bit",
+  "loaded_context_length": 8192,
+  "generated_inputs": 13,
+  "input_counts": {
+    "fairness": 3,
+    "robustness": 8,
+    "ethics": 2
+  },
+  "schema_valid_answers": 13,
+  "abstentions": 1,
+  "responses_with_reasoning_content": 0,
+  "resume_additional_inference_requests": 0,
+  "development_test_overlap": 0,
+  "response_hash_matches_scores": true,
+  "source_hashes_match": true,
+  "offline_tests_passed": 11,
+  "ruff_check": "passed",
+  "ruff_format_check": "passed",
+  "report_export": "English Markdown, CSV, LaTeX table, three PNG figures, and failure inventory exported successfully.",
+  "latex_pdf_compilation": "Not performed; the course report template remains unchanged."
+}

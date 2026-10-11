@@ -1,0 +1,202 @@
+{
+  "identity": {
+    "config": {
+      "model": {
+        "base_url": "http://127.0.0.1:1234/v1",
+        "model_id": "google/gemma-4-e4b",
+        "temperature": 0.0,
+        "max_tokens": 192,
+        "reasoning_effort": "none",
+        "timeout_seconds": 90.0,
+        "max_attempts": 2
+      },
+      "data": {
+        "repo_id": "TrustLLM/TrustLLM-dataset",
+        "revision": "59fdb19b351609c93de79a9bf882af5801525d08",
+        "raw_dir": "data/raw/trustllm",
+        "seed": 44
+      },
+      "sampling": {
+        "fairness_test": 120,
+        "ethics_test": 120,
+        "robustness_test_pairs_per_task": 30,
+        "development_per_label": 10,
+        "development_pairs_per_task": 3
+      }
+    },
+    "samples_sha256": "5764eac819145695286f4c531141940dc27ee506754d1da9d2cc21427e23bc68",
+    "prompt_version": "structured-classification-v1",
+    "code_sha256": {
+      "__init__.py": "94b7911c3fb182f4f203301d6441bb512d878a7015e1c39d28c9aae0accae662",
+      "__main__.py": "d8ed327394b26de8fe2c7d2ca60d3e525252d420c510c680b826e083040e8cee",
+      "analysis.py": "95dc09de4fbe3c4d6fcd3dfdedf63b2dab3ce36da339a3acbb8b8eeeb7a09937",
+      "cli.py": "cda4914e72bb5b2a8d5b390612aa797d9a63216edf2de2de61431f7c425ce1be",
+      "client.py": "0fc4a7d4cb480b5e06f6405879ee177b127635f5429022ac4f5661728cc1911b",
+      "data.py": "42993f0d73b15bbeb627df4d8a874188cb731c855c0c278771a920808d7962d4",
+      "experiment.py": "8e58583dac788b8fb34091438a09ff712b7e4c06566ee811e8d99d91a0095803",
+      "io.py": "d8f9ff06d7edf83bc190674117c13e65e5bc52357d75ab454edace13c6ea3b4f",
+      "tasks.py": "47a3702694bebeb8fb68abe82fecb10ba2759583fb64e6213c12cd30b9201421"
+    }
+  },
+  "prepared_manifest": {
+    "profile": "full",
+    "purpose": "Part A commonsense-only ETHICS refinement",
+    "source": {
+      "provider": "huggingface",
+      "repo_id": "TrustLLM/TrustLLM-dataset",
+      "revision": "59fdb19b351609c93de79a9bf882af5801525d08",
+      "files": {
+        "fairness/stereotype_recognition.json": "02c82f4537e07472433e808c883d2d35279f5117830270d25a2f56a6abb71ecb",
+        "robustness/AdvGLUE.json": "95da7e9c8b1091898af2d91c9260c144d8ae3b288a75ae910fd403ddc64237b1",
+        "ethics/implicit_ETHICS.json": "07374119724cafe57d96b643283c0cc6180bd43d0151377944ef6db593cd5a95"
+      }
+    },
+    "seed": 44,
+    "sampling": {
+      "topic": "commonsense",
+      "per_label": 60,
+      "excluded_ids": [
+        "ethics:131",
+        "ethics:259",
+        "ethics:264",
+        "ethics:267",
+        "ethics:270",
+        "ethics:305",
+        "ethics:318",
+        "ethics:322",
+        "ethics:338",
+        "ethics:340",
+        "ethics:398",
+        "ethics:410",
+        "ethics:411",
+        "ethics:417",
+        "ethics:43",
+        "ethics:496",
+        "ethics:499",
+        "ethics:67",
+        "ethics:92",
+        "ethics:96",
+        "fairness:106",
+        "fairness:139",
+        "fairness:158",
+        "fairness:167",
+        "fairness:198",
+        "fairness:228",
+        "fairness:231",
+        "fairness:322",
+        "fairness:34",
+        "fairness:353",
+        "fairness:365",
+        "fairness:371",
+        "fairness:39",
+        "fairness:417",
+        "fairness:430",
+        "fairness:431",
+        "fairness:468",
+        "fairness:547",
+        "fairness:592",
+        "fairness:610",
+        "fairness:651",
+        "fairness:703",
+        "fairness:72",
+        "fairness:720",
+        "fairness:796",
+        "fairness:848",
+        "fairness:854",
+        "fairness:900",
+        "fairness:920",
+        "fairness:980",
+        "robustness:mnli:361:modified",
+        "robustness:mnli:361:original",
+        "robustness:mnli:403:modified",
+        "robustness:mnli:403:original",
+        "robustness:mnli:419:modified",
+        "robustness:mnli:419:original",
+        "robustness:qnli:229:modified",
+        "robustness:qnli:229:original",
+        "robustness:qnli:231:modified",
+        "robustness:qnli:231:original",
+        "robustness:qnli:245:modified",
+        "robustness:qnli:245:original",
+        "robustness:qqp:14:modified",
+        "robustness:qqp:14:original",
+        "robustness:qqp:22:modified",
+        "robustness:qqp:22:original",
+        "robustness:qqp:68:modified",
+        "robustness:qqp:68:original",
+        "robustness:sst2:103:modified",
+        "robustness:sst2:103:original",
+        "robustness:sst2:158:modified",
+        "robustness:sst2:158:original",
+        "robustness:sst2:165:modified",
+        "robustness:sst2:165:original"
+      ]
+    },
+    "counts": {
+      "ethics": 120
+    },
+    "input_count": 120,
+    "samples_sha256": "5764eac819145695286f4c531141940dc27ee506754d1da9d2cc21427e23bc68",
+    "rationale": "Post-run audit found justice task/label semantics incompatible with the shared wrong/not wrong prompt. No labels or prompts were repaired."
+  },
+  "started_at": "2026-10-11T06:22:39.676104+00:00",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "packages": {
+      "openai": "3.28.0",
+      "huggingface-hub": "2.2.0",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "connection": {
+    "available_model_ids": [
+      "google/gemma-4-e4b",
+      "josiefied-qwen2.5-7b-instruct-abliterated-v2",
+      "qwen/qwen3.5-9b",
+      "text-embedding-nomic-embed-text-v1.5"
+    ],
+    "target_model": {
+      "type": "llm",
+      "publisher": "google",
+      "key": "google/gemma-4-e4b",
+      "display_name": "Gemma 4 E4B",
+      "architecture": "gemma4",
+      "quantization": {
+        "name": "4bit",
+        "bits_per_weight": 4
+      },
+      "size_bytes": 6861915950,
+      "params_string": "4B",
+      "loaded_instances": [
+        {
+          "id": "google/gemma-4-e4b",
+          "config": {
+            "context_length": 8192,
+            "parallel": 4
+          }
+        }
+      ],
+      "max_context_length": 131072,
+      "format": "mlx",
+      "capabilities": {
+        "vision": true,
+        "trained_for_tool_use": true,
+        "reasoning": {
+          "allowed_options": [
+            "off",
+            "on"
+          ],
+          "default": "on"
+        }
+      },
+      "description": null,
+      "variants": [
+        "google/gemma-4-e4b@4bit"
+      ],
+      "selected_variant": "google/gemma-4-e4b@4bit"
+    }
+  }
+}

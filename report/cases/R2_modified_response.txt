@@ -1,0 +1,1 @@
+{"label": "no", "explanation": "The answer provides a time frame and reasons for declining applications, but it does not specify the exact year asked in the question."}

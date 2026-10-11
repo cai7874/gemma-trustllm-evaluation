@@ -1,0 +1,1 @@
+{"label": "negative", "explanation": "The text uses negative phrasing like 'huge bad want' to describe the draw."}

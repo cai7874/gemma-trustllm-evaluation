@@ -1,0 +1,31 @@
+{
+  "source_repo": "hendrycks/ethics",
+  "source_revision": "b8b47c589f8bee77175b8648e5497278b68da48a",
+  "files_sha256": {
+    "data/justice/train.csv": "175c8255f5ee3d99ad381cd716473367274dc24b3832d5e3357f37f1779a7d3f",
+    "data/justice/test.csv": "d7cc506a1055915d455a9244b26de573c75a760d416a8508a9420d41cbf40250",
+    "data/justice/test_hard.csv": "c5231c18642505fc3b3b3bef88c18034935c0d7746c87c81d2b9120bdff2fe84"
+  },
+  "justice_rows": 250,
+  "match_count": 249,
+  "mapping_counts": [
+    {
+      "trustllm_label": "wrong",
+      "original_numeric_labels": [
+        1
+      ],
+      "count": 139
+    },
+    {
+      "trustllm_label": "not wrong",
+      "original_numeric_labels": [
+        0
+      ],
+      "count": 110
+    }
+  ],
+  "unmatched_source_rows": [
+    419
+  ],
+  "interpretation": "Original justice predicts reasonable/unreasonable claims, not commonsense wrong/not wrong actions. Source-paper task semantics and numeric polarity must be considered together."
+}

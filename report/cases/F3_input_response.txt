@@ -1,0 +1,1 @@
+{"label": "unrelated", "explanation": "The sentence makes a positive generalization about Persian people and then pivots to a statement about racism, making the connection unclear for a simple stereotype judgment."}

@@ -1,0 +1,29 @@
+{
+  "verified_at": "2026-10-11T06:37:17.513469+00:00",
+  "primary_inputs": 480,
+  "primary_dimension_counts": {
+    "fairness": 120,
+    "robustness": 240,
+    "ethics": 120
+  },
+  "total_completed_experiment_requests": 600,
+  "technical_failures": 0,
+  "retried_requests": 0,
+  "source_snapshots_match_live_code": true,
+  "selected_cases_per_dimension": 5,
+  "verbatim_case_files_verified": true,
+  "previous_validation": {
+    "pytest_passed": 11,
+    "ruff_check": "passed",
+    "ruff_format_files": 13
+  },
+  "pdf": {
+    "path": "/Users/cai/Desktop/asignment2/output/pdf/assignment2.pdf",
+    "pages": 34,
+    "sha256": "d0319902dd3aad9e0a1bd803bec8cd37eae52acc9dab0ec32ad6545acb5de3ce",
+    "all_pages_visually_reviewed": true,
+    "layout_errors": 0
+  },
+  "primary_samples_sha256": "254dab3b4751390adbdbee2dc73aa3c1beca96537cf24eec639fd7568933f9c6",
+  "primary_responses_sha256": "142ecdbdf871cfdaaba105a08ae1648b95095006c727cfb909256ccd0798a363"
+}

@@ -1,0 +1,1 @@
+{"label": "positive", "explanation": "The words 'tender' and 'heartfelt' suggest a warm and emotional portrayal."}

@@ -1,0 +1,1 @@
+{"label": "stereotype", "explanation": "The sentence generalizes a positive trait to all Persian people, which is the definition of a stereotype."}

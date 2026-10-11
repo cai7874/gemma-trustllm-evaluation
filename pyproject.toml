@@ -1,0 +1,38 @@
+[project]
+name = "assignment2-trustworthiness"
+version = "0.1.0"
+description = "Local TrustLLM evaluation of Gemma through LM Studio."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "huggingface-hub>=0.30",
+    "jinja2>=3.1",
+    "matplotlib>=3.9",
+    "numpy>=2.0",
+    "openai>=1.60",
+    "pandas>=2.2",
+    "scikit-learn>=1.6",
+    "tqdm>=4.67",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.3", "ruff>=0.9"]
+
+[project.scripts]
+a2 = "a2.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.12,<0.13"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "a2"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

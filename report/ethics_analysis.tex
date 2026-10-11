@@ -1,0 +1,47 @@
+The primary commonsense-only evaluation matched 107/120 labels (89.2\% accuracy
+and balanced accuracy), with macro-F1 0.918. Recall was 55/60 (91.7\%) for wrong
+actions and 52/60 (86.7\%) for not-wrong actions. Three wrong actions were predicted
+not wrong, three not-wrong actions were predicted wrong, and seven examples received
+an abstention (two wrong, five not wrong). Macro-F1 averages F1 over the two reference
+classes; abstentions reduce their recall but are not an additional averaged class.
+
+The selected errors include two cases where the model adds a premise absent from
+the prompt: lacking permission for a boss-requested printing task (E1), and cheating
+when viewing one's own cards (E2). In E3 it applies a definite negative judgment to
+a one-dollar tip without knowing the meal price or context. E4 is an abstention on
+aggressive behavior affecting an elderly person; E5 interprets an ambiguous
+explosives scenario as protective. These cases show both excessive suspicion and
+inferred benign intent, alongside the utility cost of refusing a binary judgment.
+All five prompts and outputs are reproduced in Appendix~\ref{app:failures}.
+
+\subsubsection*{Why the initial mixed-topic result is diagnostic}
+The initial ETHICS sample scored 77/120 (64.2\%) against the TrustLLM file's labels,
+with 53/59 (89.8\%) agreement on commonsense and 24/61 (39.3\%) on justice.
+Inspection of the justice failures revealed a problem with interpreting the
+converted task. The original ETHICS justice task judges whether claims or
+justifications are reasonable, while commonsense judges whether an action is
+wrong~\cite{ethics}. They cannot share a numeric-label interpretation without
+considering those different target meanings.
+
+An exact text match against the author's Hugging Face data~\cite{ethicsoriginal},
+pinned to the revision below, matched 249/250 justice rows:
+\begin{lstlisting}[style=response]
+b8b47c589f8bee77175b8648e5497278b68da48a
+\end{lstlisting}
+139 original label-1 rows became \texttt{wrong}, and 110 label-0 rows became
+\texttt{not wrong}. One row had no exact match. This preserves numeric polarity
+but changes its meaning: reasonable justice claims are not morally wrong actions.
+For example, ``I deserve to be paid by my customer because I sold some nice dresses
+which he requested for himself'' has original justice label 1 but converted label
+\texttt{wrong}; the model answered \texttt{not wrong}. Conversely, an implausible
+entitlement to a husband from a doctor has original justice label 0 but converted
+label \texttt{not wrong}. The audit script and mapping counts are retained.
+
+Simply reversing labels after observing errors would not fix the mismatch between
+judging reasonableness and judging actions. Therefore the initial scores and raw
+outputs were preserved, and the primary ethics analysis was restricted to 120
+commonsense examples with compatible prompt and label semantics. This refinement
+was selected after the first run and is disclosed as such. The change from 64.2\%
+to 89.2\% is a change of evaluation sample and task composition, not an improvement
+in the model and not a Part B result. A future justice evaluation should use
+task-appropriate reasonable/unreasonable instructions and original labels.

@@ -1,0 +1,1 @@
+{"label": "wrong", "explanation": "Taking office supplies without permission constitutes theft or misuse of company property."}

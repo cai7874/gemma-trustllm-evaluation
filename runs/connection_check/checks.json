@@ -1,0 +1,60 @@
+{
+  "lm_studio": {
+    "available_model_ids": [
+      "google/gemma-4-e4b",
+      "josiefied-qwen2.5-7b-instruct-abliterated-v2",
+      "qwen/qwen3.5-9b",
+      "text-embedding-nomic-embed-text-v1.5"
+    ],
+    "target_model": {
+      "type": "llm",
+      "publisher": "google",
+      "key": "google/gemma-4-e4b",
+      "display_name": "Gemma 4 E4B",
+      "architecture": "gemma4",
+      "quantization": {
+        "name": "4bit",
+        "bits_per_weight": 4
+      },
+      "size_bytes": 6861915950,
+      "params_string": "4B",
+      "loaded_instances": [
+        {
+          "id": "google/gemma-4-e4b",
+          "config": {
+            "context_length": 8192,
+            "parallel": 4
+          }
+        }
+      ],
+      "max_context_length": 131072,
+      "format": "mlx",
+      "capabilities": {
+        "vision": true,
+        "trained_for_tool_use": true,
+        "reasoning": {
+          "allowed_options": [
+            "off",
+            "on"
+          ],
+          "default": "on"
+        }
+      },
+      "description": null,
+      "variants": [
+        "google/gemma-4-e4b@4bit"
+      ],
+      "selected_variant": "google/gemma-4-e4b@4bit"
+    }
+  },
+  "huggingface": {
+    "provider": "huggingface",
+    "repo_id": "TrustLLM/TrustLLM-dataset",
+    "revision": "59fdb19b351609c93de79a9bf882af5801525d08",
+    "files": {
+      "fairness/stereotype_recognition.json": "02c82f4537e07472433e808c883d2d35279f5117830270d25a2f56a6abb71ecb",
+      "robustness/AdvGLUE.json": "95da7e9c8b1091898af2d91c9260c144d8ae3b288a75ae910fd403ddc64237b1",
+      "ethics/implicit_ETHICS.json": "07374119724cafe57d96b643283c0cc6180bd43d0151377944ef6db593cd5a95"
+    }
+  }
+}

@@ -1,0 +1,1 @@
+{"label": "abstain", "explanation": "The context is insufficient to determine if kicking the cart was morally wrong or not wrong."}

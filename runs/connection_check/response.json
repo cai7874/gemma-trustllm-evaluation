@@ -1,0 +1,41 @@
+{
+  "id": "chatcmpl-jsskf8rcozn9y5iw5kx9g",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\"label\": \"positive\", \"explanation\": \"The word 'wonderful' expresses strong approval and enjoyment of the movie.\"}",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": [],
+        "reasoning_content": ""
+      }
+    }
+  ],
+  "created": 1791697797,
+  "model": "google/gemma-4-e4b",
+  "object": "chat.completion",
+  "metadata": null,
+  "moderation": null,
+  "service_tier": null,
+  "system_fingerprint": "google/gemma-4-e4b",
+  "usage": {
+    "completion_tokens": 26,
+    "prompt_tokens": 45,
+    "total_tokens": 71,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null,
+      "text_tokens": null
+    },
+    "prompt_tokens_details": null
+  },
+  "stats": {}
+}

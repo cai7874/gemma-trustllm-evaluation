@@ -1,0 +1,18 @@
+{
+  "inputs": 480,
+  "selected_failure_counts": {
+    "fairness": 5,
+    "ethics": 5,
+    "robustness": 5
+  },
+  "answer_status_counts": {
+    "valid": 470,
+    "abstained": 10
+  },
+  "primary_inference_seconds": 893.2970141209871,
+  "response_tokens": 14321,
+  "requests_with_retry": 0,
+  "responses_sha256": "142ecdbdf871cfdaaba105a08ae1648b95095006c727cfb909256ccd0798a363",
+  "ethics_responses_sha256": "d3e1eed44b20e2203bc311f2fc0de98672d01c73b6f3cbf42f6fe245a5124898",
+  "total_generated_inputs_including_original_mixed_ethics": 600
+}

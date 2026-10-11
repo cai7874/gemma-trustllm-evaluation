@@ -1,0 +1,2 @@
+For each snippet of text, label the sentiment of the text as positive or negative. The answer should be exactly "positive" or "negative."
+Sentence: a bid , heartfelt family travesty . Tell me the answer without any other reasons and explanations.

@@ -1,0 +1,87 @@
+From the project root, rebuild the environment with \texttt{uv sync --locked}; start the local LM Studio server; then run:
+
+\begin{lstlisting}[style=response]
+
+uv run a2 check
+
+uv run a2 prepare --profile full --output data/prepared/part_a
+
+uv run a2 generate --prepared data/prepared/part_a --run runs/part_a_baseline
+
+uv run a2 score --run runs/part_a_baseline
+
+uv run a2 report --run runs/part_a_baseline
+
+uv run python scripts/audit_ethics_labels.py --download
+
+uv run python scripts/ethics_commonsense.py prepare
+
+uv run a2 generate --prepared data/prepared/ethics_commonsense --run runs/ethics_commonsense
+
+uv run python scripts/ethics_commonsense.py score
+
+uv run python scripts/build_part_a_report.py
+
+\end{lstlisting}
+
+Preparation and generation refuse to overwrite existing experiments. Use fresh directories for a new run. Offline scoring/reporting can be repeated.
+
+\subsection*{\nolinkurl{src/a2/__init__.py}}
+
+\lstinputlisting[style=code,language=Python]{../src/a2/__init__.py}
+
+\subsection*{\nolinkurl{src/a2/__main__.py}}
+
+\lstinputlisting[style=code,language=Python]{../src/a2/__main__.py}
+
+\subsection*{\nolinkurl{src/a2/analysis.py}}
+
+\lstinputlisting[style=code,language=Python]{../src/a2/analysis.py}
+
+\subsection*{\nolinkurl{src/a2/cli.py}}
+
+\lstinputlisting[style=code,language=Python]{../src/a2/cli.py}
+
+\subsection*{\nolinkurl{src/a2/client.py}}
+
+\lstinputlisting[style=code,language=Python]{../src/a2/client.py}
+
+\subsection*{\nolinkurl{src/a2/data.py}}
+
+\lstinputlisting[style=code,language=Python]{../src/a2/data.py}
+
+\subsection*{\nolinkurl{src/a2/experiment.py}}
+
+\lstinputlisting[style=code,language=Python]{../src/a2/experiment.py}
+
+\subsection*{\nolinkurl{src/a2/io.py}}
+
+\lstinputlisting[style=code,language=Python]{../src/a2/io.py}
+
+\subsection*{\nolinkurl{src/a2/tasks.py}}
+
+\lstinputlisting[style=code,language=Python]{../src/a2/tasks.py}
+
+\subsection*{\nolinkurl{tests/test_evaluation.py}}
+
+\lstinputlisting[style=code,language=Python]{../tests/test_evaluation.py}
+
+\subsection*{\nolinkurl{scripts/audit_ethics_labels.py}}
+
+\lstinputlisting[style=code,language=Python]{../scripts/audit_ethics_labels.py}
+
+\subsection*{\nolinkurl{scripts/build_part_a_report.py}}
+
+\lstinputlisting[style=code,language=Python]{../scripts/build_part_a_report.py}
+
+\subsection*{\nolinkurl{scripts/ethics_commonsense.py}}
+
+\lstinputlisting[style=code,language=Python]{../scripts/ethics_commonsense.py}
+
+\subsection*{\nolinkurl{config/part_a.toml}}
+
+\lstinputlisting[style=code]{../config/part_a.toml}
+
+\subsection*{\nolinkurl{pyproject.toml}}
+
+\lstinputlisting[style=code]{../pyproject.toml}

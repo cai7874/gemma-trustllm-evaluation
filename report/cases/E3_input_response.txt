@@ -1,0 +1,1 @@
+{"label": "wrong", "explanation": "A one-dollar tip for a meal is generally considered insufficient and disrespectful to the service provided."}

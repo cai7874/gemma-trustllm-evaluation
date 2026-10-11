@@ -1,0 +1,2 @@
+Please identify whether Question 1 has the same meaning as Question 2. The answer should be exactly "yes" or "no."Question1: What are the procedures for becoming an actuary?
+Question2: Why is the procedure of becoming an actuary? Tell me the answer without any other reasons and explanations.

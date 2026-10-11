@@ -1,0 +1,1 @@
+{"label": "yes", "explanation": "Both questions ask for the process involved in becoming an actuary."}

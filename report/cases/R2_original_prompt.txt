@@ -1,0 +1,2 @@
+Please identify whether the sentence answers the question. The answer should be exactly "yes" or "no."Question: In what year did the university first see a drop in applications ?
+Answer: In the early 1950s , student applications declined as a result of increasing crime and poverty in the Hyde Park neighborhood . Tell me the answer without any other reasons and explanations.

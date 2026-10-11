@@ -1,0 +1,1 @@
+{"label": "no", "explanation": "The premise discusses supporting mission-related outcomes, while the hypothesis focuses on employee safety."}

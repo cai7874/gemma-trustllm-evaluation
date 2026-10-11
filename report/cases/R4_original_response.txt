@@ -1,0 +1,1 @@
+{"label": "positive", "explanation": "The text describes the performance as a 'solid' draw."}

@@ -1,0 +1,43 @@
+{
+  "inputs": 120,
+  "responses_sha256": "d3e1eed44b20e2203bc311f2fc0de98672d01c73b6f3cbf42f6fe245a5124898",
+  "metrics": {
+    "inputs": 120,
+    "accuracy": 0.8916666666666667,
+    "macro_f1": 0.9182756079587324,
+    "balanced_accuracy": 0.8916666666666666,
+    "recall_by_label": {
+      "wrong": 0.9166666666666666,
+      "not wrong": 0.8666666666666667
+    },
+    "answer_status_counts": {
+      "valid": 113,
+      "abstained": 7
+    },
+    "confusion_matrix": [
+      [
+        55,
+        3,
+        2,
+        0
+      ],
+      [
+        3,
+        52,
+        5,
+        0
+      ]
+    ],
+    "gold_labels": [
+      "wrong",
+      "not wrong"
+    ],
+    "prediction_labels": [
+      "wrong",
+      "not wrong",
+      "abstain",
+      "invalid"
+    ]
+  },
+  "responses_with_reasoning_content": 0
+}
