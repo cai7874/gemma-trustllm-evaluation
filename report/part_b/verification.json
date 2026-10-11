@@ -1,5 +1,5 @@
 {
-  "verified_at": "2026-10-11T07:24:14.332994+00:00",
+  "verified_at": "2026-10-11T07:44:29.706852+00:00",
   "offline_tests": {
     "passed": 20,
     "command": ".venv/bin/pytest -q",
@@ -75,12 +75,15 @@
   },
   "pdf": {
     "path": "output/pdf/assignment2_part_ab.pdf",
-    "pages": 61,
-    "sha256": "7a3b36fa924a39f26c8d71c4db29eec17c3483ba8c9666c722c965ecb1e93a36",
+    "pages": 27,
+    "sha256": "6b853c13d8a21c47e90e5266bb618efc845e79a00420c4acab2e26601a75538a",
     "compiler": "Tectonic 0.17.0",
     "compiled_successfully": true,
     "layout_or_reference_warnings": 0,
     "all_pages_rendered_and_visually_reviewed": true,
-    "final_layout_change": "Started the qualitative appendix on its own page; re-reviewed changed pages and confirmed remaining pages identical to the reviewed render."
+    "final_layout_change": "Replaced complete code listings with the GitHub repository link and explicitly disclosed ChatGPT and Codex assistance in code and report writing. Visually reviewed pages 1, 13, 15, and 27; all 23 other retained pages are pixel-identical to the previously reviewed PDF.",
+    "code_availability": "GitHub link; private repository requires reviewer access",
+    "ai_disclosure": "ChatGPT and Codex assistance explicitly covers code writing and report writing",
+    "clickable_repository_link_verified": true
   }
 }

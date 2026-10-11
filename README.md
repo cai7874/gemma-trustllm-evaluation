@@ -255,8 +255,10 @@ frozen source, configuration, sample, demonstration, and baseline hashes.
 `docs/part_b_plan.md` records the original proposal and subsequent development
 decisions. The complete English report is built from the supplied LaTeX template
 in `1RT730_Assignment2/assignment2_part_ab.tex`; the Part A-only source and PDF
-remain preserved. All implementation code is included in the combined report,
-so reading the submission does not depend on private repository access.
+remain preserved. The combined report links to GitHub instead of reproducing all
+implementation code. The repository remains private; reviewers require GitHub
+access to inspect the implementation. Its AI disclosure explicitly identifies
+ChatGPT and Codex assistance in both code writing and report writing.
 
 | Method | Accuracy | Macro-F1 | Anti-stereotype recall |
 | --- | ---: | ---: | ---: |
@@ -272,7 +274,7 @@ corrects one baseline error and introduces six regressions. These outcomes and
 limitations are analyzed with five real cases per strategy. The gain concerns
 stereotype recognition on this subset, not a general reduction of social bias.
 
-The completed English PDF is `output/pdf/assignment2_part_ab.pdf` (61 pages).
+The completed English PDF is `output/pdf/assignment2_part_ab.pdf`.
 `report/part_b/comparison.json` contains the matched metrics and measured costs;
 `report/part_b/verification.json` records the final checks. Across development and
 formal mitigation runs, Part B records 384 new model generations.
