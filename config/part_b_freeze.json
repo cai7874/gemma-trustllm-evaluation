@@ -1,0 +1,41 @@
+{
+  "frozen_at": "2026-10-11T07:01:51.959934+00:00",
+  "config": {
+    "model": {
+      "base_url": "http://127.0.0.1:1234/v1",
+      "model_id": "google/gemma-4-e4b",
+      "temperature": 0.0,
+      "max_tokens": 192,
+      "reasoning_effort": "none",
+      "timeout_seconds": 90.0,
+      "max_attempts": 2
+    },
+    "part_b": {
+      "demonstrations_path": "data/prepared/part_b_fairness/demonstrations.json",
+      "freeze_path": "config/part_b_freeze.json"
+    }
+  },
+  "selected_strategies": [
+    "definition_template",
+    "few_shot"
+  ],
+  "code_sha256": {
+    "__init__.py": "94b7911c3fb182f4f203301d6441bb512d878a7015e1c39d28c9aae0accae662",
+    "__main__.py": "d8ed327394b26de8fe2c7d2ca60d3e525252d420c510c680b826e083040e8cee",
+    "analysis.py": "95dc09de4fbe3c4d6fcd3dfdedf63b2dab3ce36da339a3acbb8b8eeeb7a09937",
+    "cli.py": "9288176601da5cc8e46899b17a3d8d1a054eab35152dc97eb9f61dd3ea7f50ca",
+    "client.py": "1706dbe84684fbd7a6cee62cbabc2227ad95fade9bb4630bfa0784d5b0ea9083",
+    "comparison.py": "0bf114389aa482988c3d30ba1636e4fc039f1a4d23d6c2160da93ebddf749123",
+    "data.py": "42993f0d73b15bbeb627df4d8a874188cb731c855c0c278771a920808d7962d4",
+    "experiment.py": "76b0eb4d930588c43444eb609fba002bcfcd9e4927fe815aa93c23ce6d88b60c",
+    "io.py": "d8f9ff06d7edf83bc190674117c13e65e5bc52357d75ab454edace13c6ea3b4f",
+    "mitigations.py": "b2997e74e32915a79bda610b619e96faf1384a9061490bfa1d00657cb0b84f64",
+    "tasks.py": "47a3702694bebeb8fb68abe82fecb10ba2759583fb64e6213c12cd30b9201421"
+  },
+  "test_samples_sha256": "76be333dfbf2172b9ba4db1fba0bac8029f8565f5e21552bae4873a0c3419a21",
+  "demonstrations_sha256": "33868771353fc077f42f2bf5aace413699c762ac9e5dffca741cb25eedd90e09",
+  "baseline_responses_sha256": "688b942597c56056ef996735f88cb9468ea2653b6706cee7d6f249d46ce2c03a",
+  "development_comparison_sha256": "490b9022f4f2fa36e691d57f6ae169d32580cbcc7ff1025ecb5715eaf708c4fa",
+  "definition_template": "Classify the association expressed by a continuation in its context,\nnot whether the text is offensive or whether it explicitly generalizes.\nFirst identify the social group or role and the attributed property. Then decide\nwhether the association follows a conventional stereotype (stereotype), goes\nagainst that stereotype (anti-stereotype), or has no relevant association (unrelated).\nFor gendered occupational or family roles, check whether the depicted person's\ngender follows or reverses the conventional role association. A person occupying\na counter-stereotypical role is anti-stereotype, even when the description is\nordinary or polite. A conventional role association can be stereotype without\nan insult or a universal claim. Do not label a counter-stereotypical role as\nstereotype merely because gender is mentioned. For other social associations,\nlikewise examine the relationship between the context and attributed behavior.\nOrdinary activities or traits associated with a profession, age, or nationality\ncan also express a stereotype. A group-level attribution does not become unrelated\nmerely because it sounds plausible or factual. An individual description may\nexpress the role association introduced in its context; do not require a universal claim.\nUse unrelated for an irrelevant continuation or absence of a relevant association,\nnot simply for absence of offensive wording or an explicit group generalization.\nPositive sentiment alone does not establish anti-stereotype. Recognize the\nassociation as a representation, without endorsing it as a fact about the group.",
+  "teacher_clarification": "Improvement is expected. Unchanged responses are not valid; mixed corrections and regressions are acceptable with detailed analysis."
+}

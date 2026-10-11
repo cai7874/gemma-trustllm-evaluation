@@ -38,6 +38,32 @@ def main() -> None:
     generation.add_argument("--prepared", type=Path, required=True)
     generation.add_argument("--run", type=Path, required=True)
     generation.add_argument("--resume", action="store_true")
+    mitigation_preparation = commands.add_parser(
+        "prepare-mitigation", help="Freeze Part B fairness splits."
+    )
+    mitigation_preparation.add_argument("--output", type=Path, required=True)
+    mitigation = commands.add_parser("mitigate", help="Run an explicit Part B fairness strategy.")
+    mitigation.add_argument("--prepared", type=Path, required=True)
+    mitigation.add_argument("--run", type=Path, required=True)
+    mitigation.add_argument(
+        "--strategy", choices=["definition_template", "self_review", "few_shot"], required=True
+    )
+    mitigation.add_argument("--parent-run", type=Path)
+    mitigation.add_argument("--resume", action="store_true")
+    fairness_score = commands.add_parser("score-fairness", help="Score a saved fairness-only run.")
+    fairness_score.add_argument("--run", type=Path, required=True)
+    comparison = commands.add_parser("compare-fairness", help="Compare paired saved fairness runs.")
+    comparison.add_argument("--baseline", type=Path, required=True)
+    comparison.add_argument("--runs", type=Path, nargs="+", required=True)
+    comparison.add_argument("--output", type=Path, required=True)
+    freeze = commands.add_parser(
+        "freeze-mitigations", help="Freeze development-selected strategies."
+    )
+    freeze.add_argument("--comparison", type=Path, required=True)
+    demonstrations = commands.add_parser(
+        "prepare-demonstrations", help="Separate fixed few-shot examples."
+    )
+    demonstrations.add_argument("--prepared", type=Path, required=True)
     for name, help_text in [
         ("score", "Score saved responses offline."),
         ("report", "Export tables, figures, and report notes offline."),
@@ -67,6 +93,40 @@ def main() -> None:
         )
     elif args.command == "generate":
         print(json.dumps(generate(config, args.prepared, args.run, args.resume), indent=2))
+    elif args.command == "prepare-mitigation":
+        from a2.mitigations import prepare_fairness
+
+        print(json.dumps(prepare_fairness(root, args.output), indent=2))
+    elif args.command == "mitigate":
+        print(
+            json.dumps(
+                generate(
+                    config,
+                    args.prepared,
+                    args.run,
+                    args.resume,
+                    strategy=args.strategy,
+                    parent_dir=args.parent_run,
+                ),
+                indent=2,
+            )
+        )
+    elif args.command == "score-fairness":
+        from a2.comparison import score_fairness
+
+        print(json.dumps(score_fairness(args.run), indent=2))
+    elif args.command == "compare-fairness":
+        from a2.comparison import compare_fairness
+
+        print(json.dumps(compare_fairness(args.baseline, args.runs, args.output), indent=2))
+    elif args.command == "prepare-demonstrations":
+        from a2.mitigations import prepare_demonstrations
+
+        print(json.dumps(prepare_demonstrations(args.prepared), indent=2))
+    elif args.command == "freeze-mitigations":
+        from a2.mitigations import freeze_mitigations
+
+        print(json.dumps(freeze_mitigations(root, config, args.comparison), indent=2))
     elif args.command == "score":
         from a2.analysis import score
 

@@ -1,0 +1,121 @@
+{
+  "identity": {
+    "config": {
+      "model": {
+        "base_url": "http://127.0.0.1:1234/v1",
+        "model_id": "google/gemma-4-e4b",
+        "temperature": 0.0,
+        "max_tokens": 192,
+        "reasoning_effort": "none",
+        "timeout_seconds": 90.0,
+        "max_attempts": 2
+      }
+    },
+    "samples_sha256": "4800d575c1313b3811c25481abcdaa054237d36697d5d8162edf5cbefac3eb79",
+    "prompt_version": "structured-classification-v1",
+    "code_sha256": {
+      "__init__.py": "94b7911c3fb182f4f203301d6441bb512d878a7015e1c39d28c9aae0accae662",
+      "__main__.py": "d8ed327394b26de8fe2c7d2ca60d3e525252d420c510c680b826e083040e8cee",
+      "analysis.py": "95dc09de4fbe3c4d6fcd3dfdedf63b2dab3ce36da339a3acbb8b8eeeb7a09937",
+      "cli.py": "e11e97688b73c89671c4d9e593bf3dba3c8cb4adf2b83fc87849c32ae403f65b",
+      "client.py": "1706dbe84684fbd7a6cee62cbabc2227ad95fade9bb4630bfa0784d5b0ea9083",
+      "comparison.py": "339dd1651f6f22fa4295bfc844e309205ac0c85a3d7ed3ad9e701b08fbff4939",
+      "data.py": "42993f0d73b15bbeb627df4d8a874188cb731c855c0c278771a920808d7962d4",
+      "experiment.py": "16f6399a9d2aa35024d166ac786ae42a92908b83fc907547addefcb6acc7e39f",
+      "io.py": "d8f9ff06d7edf83bc190674117c13e65e5bc52357d75ab454edace13c6ea3b4f",
+      "mitigations.py": "b8aca2797275457999d5ef0211d445d9e582360e3fafd0270c57446368550a54",
+      "tasks.py": "47a3702694bebeb8fb68abe82fecb10ba2759583fb64e6213c12cd30b9201421"
+    },
+    "strategy": "self_review",
+    "parent_responses_sha256": "c31722df13bd0833e1f91ca4a8d4e55ba328c8928a810fc3b15ae4470586855a",
+    "parent_run": "runs/part_b/development_baseline"
+  },
+  "prepared_manifest": {
+    "profile": "development",
+    "purpose": "Part B fairness development",
+    "input_count": 27,
+    "class_counts": {
+      "anti-stereotype": 8,
+      "stereotype": 9,
+      "unrelated": 10
+    },
+    "excluded_development_ids": [
+      "fairness:139",
+      "fairness:854",
+      "fairness:592"
+    ],
+    "samples_sha256": "4800d575c1313b3811c25481abcdaa054237d36697d5d8162edf5cbefac3eb79",
+    "part_a_samples_sha256": "3fde9a07c101e2011c01e4ae452972d0017d4da9f4ed3e6cab64f5c82863aed7",
+    "part_a_development_sha256": "2f68d686e03f4140a8b4376319e2f54b685fa13d3320277693ba553b2d6806ee",
+    "source": {
+      "provider": "huggingface",
+      "repo_id": "TrustLLM/TrustLLM-dataset",
+      "revision": "59fdb19b351609c93de79a9bf882af5801525d08",
+      "files": {
+        "fairness/stereotype_recognition.json": "02c82f4537e07472433e808c883d2d35279f5117830270d25a2f56a6abb71ecb",
+        "robustness/AdvGLUE.json": "95da7e9c8b1091898af2d91c9260c144d8ae3b288a75ae910fd403ddc64237b1",
+        "ethics/implicit_ETHICS.json": "07374119724cafe57d96b643283c0cc6180bd43d0151377944ef6db593cd5a95"
+      }
+    }
+  },
+  "started_at": "2026-10-11T06:52:28.193793+00:00",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "packages": {
+      "openai": "3.28.0",
+      "huggingface-hub": "2.2.0",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "connection": {
+    "available_model_ids": [
+      "google/gemma-4-e4b",
+      "josiefied-qwen2.5-7b-instruct-abliterated-v2",
+      "qwen/qwen3.5-9b",
+      "text-embedding-nomic-embed-text-v1.5"
+    ],
+    "target_model": {
+      "type": "llm",
+      "publisher": "google",
+      "key": "google/gemma-4-e4b",
+      "display_name": "Gemma 4 E4B",
+      "architecture": "gemma4",
+      "quantization": {
+        "name": "4bit",
+        "bits_per_weight": 4
+      },
+      "size_bytes": 6861915950,
+      "params_string": "4B",
+      "loaded_instances": [
+        {
+          "id": "google/gemma-4-e4b",
+          "config": {
+            "context_length": 8192,
+            "parallel": 4
+          }
+        }
+      ],
+      "max_context_length": 131072,
+      "format": "mlx",
+      "capabilities": {
+        "vision": true,
+        "trained_for_tool_use": true,
+        "reasoning": {
+          "allowed_options": [
+            "off",
+            "on"
+          ],
+          "default": "on"
+        }
+      },
+      "description": null,
+      "variants": [
+        "google/gemma-4-e4b@4bit"
+      ],
+      "selected_variant": "google/gemma-4-e4b@4bit"
+    }
+  }
+}

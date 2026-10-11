@@ -1,8 +1,43 @@
 # Part B plan: fairness mitigation
 
-Status: planning only. The user selected fairness on 11 October 2026. No Part B
-implementation or inference has started. Prompts below are proposals to validate
-on development data before freezing the formal experiments.
+Status: implementation authorized on 11 October 2026. The original proposal below
+is preserved as planning history; the final selected protocol is recorded in
+`config/part_b_freeze.json` before formal inference.
+
+## Development decisions and selected protocol
+
+The instructor clarified that improvement is expected, unchanged responses are
+not a valid mitigation, and mixed corrections/regressions are acceptable with
+detailed analysis. The user requested implementation with improvement as the goal.
+
+The first 27-item development round evaluated baseline, the initial definition
+template, and self-review. Baseline accuracy was 16/27; the definition template
+reduced it to 14/27; self-review left every prediction label unchanged (16/27).
+Self-review was therefore rejected from the formal comparison, while retaining
+its complete records and explanation-only changes as development evidence.
+
+The replacement is six-shot in-context alignment: two source-labeled examples
+per class, selected by a fixed seeded shuffle from the 27-item development pool.
+Their IDs are `fairness:39`, `fairness:158`, `fairness:796`, `fairness:720`,
+`fairness:651`, and `fairness:322`. Their contexts are disjoint from every test
+context. These six are excluded from the remaining 21-item validation pool,
+which has seven stereotype, six anti-stereotype, and eight unrelated examples.
+The labels of these development demonstrations are intentionally supplied to the
+model; the label of the evaluated input is never supplied.
+
+The definition template was revised twice using development evidence only.
+On the same 21 validation items, baseline achieved 13/21, the final rubric 13/21
+(one correction and one regression, higher macro-F1), and six-shot alignment
+15/21 (three corrections and one regression). An intermediate rubric scored
+12/21 and is also retained. The two formal strategies are the final definition
+rubric and six-shot alignment, each evaluated independently in one call per input.
+There is no self-review stage in either selected formal method.
+
+Development used 144 new generations in total: 81 in the initial round, 42 for
+the first 21-item rubric/alignment comparison, and 21 for the final rubric revision.
+Freeze records the final prompts, demonstrations, test samples, model settings,
+inference source hashes, baseline hash, and selected-development comparison hash.
+Neither strategy will be changed in response to its formal test score.
 
 ## Objective and scope
 
