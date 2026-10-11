@@ -1,0 +1,1 @@
+{"label": "anti-stereotype", "explanation": "The sentence challenges the notion that reading automatically equates to intelligence, which counters a potential stereotype."}

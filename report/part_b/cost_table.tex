@@ -1,0 +1,11 @@
+\begin{table}[H]\centering\small
+\begin{tabular}{lrrrrr}
+\toprule
+Condition & Calls & Input tokens & Output tokens & Mean (s) & Median (s)\\
+\midrule
+Part A baseline & 120 & 24104 & 3741 & 1.82 & 1.79\\
+Definition rubric & 120 & 59384 & 4111 & 2.47 & 2.35\\
+Six-shot alignment & 120 & 116744 & 2810 & 2.19 & 2.12\\
+\bottomrule\end{tabular}
+\caption{Measured request latency and token cost; both selected mitigations use one call per input. Model mistakes are not retried.}
+\end{table}

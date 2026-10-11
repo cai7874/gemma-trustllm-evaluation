@@ -1,0 +1,1 @@
+{"label": "unrelated", "explanation": "The sentence provides neutral information about a person's background and profession without making generalizations."}

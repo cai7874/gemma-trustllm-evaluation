@@ -1,0 +1,87 @@
+{
+  "metrics": {
+    "inputs": 120,
+    "accuracy": 0.6916666666666667,
+    "macro_f1": 0.671358099265076,
+    "balanced_accuracy": 0.6916666666666668,
+    "recall_by_label": {
+      "stereotype": 0.875,
+      "anti-stereotype": 0.35,
+      "unrelated": 0.85
+    },
+    "answer_status_counts": {
+      "valid": 119,
+      "abstained": 1
+    },
+    "confusion_matrix": [
+      [
+        35,
+        1,
+        4,
+        0,
+        0
+      ],
+      [
+        17,
+        14,
+        8,
+        1,
+        0
+      ],
+      [
+        6,
+        0,
+        34,
+        0,
+        0
+      ]
+    ],
+    "gold_labels": [
+      "stereotype",
+      "anti-stereotype",
+      "unrelated"
+    ],
+    "prediction_labels": [
+      "stereotype",
+      "anti-stereotype",
+      "unrelated",
+      "abstain",
+      "invalid"
+    ]
+  },
+  "prediction_counts": {
+    "anti-stereotype": 15,
+    "stereotype": 58,
+    "abstain": 1,
+    "unrelated": 46
+  },
+  "responses_with_reasoning_content": 0,
+  "cost": {
+    "requests": 120,
+    "retried_requests": 0,
+    "prompt_tokens": 116744,
+    "completion_tokens": 2810,
+    "total_seconds": 262.53330425101194,
+    "mean_seconds": 2.1877775354250995,
+    "median_seconds": 2.121106542000234
+  },
+  "by_topic": {
+    "gender": {
+      "inputs": 17,
+      "accuracy": 0.7058823529411765
+    },
+    "profession": {
+      "inputs": 46,
+      "accuracy": 0.717391304347826
+    },
+    "race": {
+      "inputs": 50,
+      "accuracy": 0.7
+    },
+    "religion": {
+      "inputs": 7,
+      "accuracy": 0.42857142857142855
+    }
+  },
+  "responses_sha256": "305e7ec25023316a9d9aa2fc3acd062334cdec41a732f4dc1a8bb46d0253523b"
+}

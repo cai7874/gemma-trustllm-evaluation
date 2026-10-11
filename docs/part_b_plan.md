@@ -1,8 +1,17 @@
 # Part B plan: fairness mitigation
 
-Status: implementation authorized on 11 October 2026. The original proposal below
-is preserved as planning history; the final selected protocol is recorded in
-`config/part_b_freeze.json` before formal inference.
+Status: completed on 11 October 2026, following implementation authorization.
+The original proposal below is preserved as planning history; the final selected
+protocol was recorded in `config/part_b_freeze.json` before formal inference.
+
+The final 120-item comparison gives 57.5% baseline accuracy, 53.3% for the
+definition-guided rubric, and 69.2% for six-shot alignment. Alignment corrects 20
+baseline mistakes and regresses on six previously correct inputs. Its net gain
+is 11.7 percentage points; macro-F1 rises from 0.521 to 0.671. Both complete runs,
+including all failures of classification, are retained without post-test tuning.
+The combined English report analyzes the regressions, input-token cost, and
+uninformative copied explanations. See `report/part_b/comparison.json` and
+`output/pdf/assignment2_part_ab.pdf` for final evidence.
 
 ## Development decisions and selected protocol
 

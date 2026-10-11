@@ -1,0 +1,1 @@
+{"label": "stereotype", "explanation": "The sentence portrays negative generalizations about a group based on their presumed background."}

@@ -119,6 +119,7 @@ def export_tables(result: dict) -> None:
 
 
 def export_figures(result: dict) -> None:
+    plt.rcParams.update({"font.size": 14, "xtick.labelsize": 12, "ytick.labelsize": 12})
     figures = REPORT / "figures"
     figures.mkdir(exist_ok=True)
     conditions = {"baseline": result["baseline"], **result["methods"]}
@@ -142,7 +143,7 @@ def export_figures(result: dict) -> None:
         )
     axes[1].set_xticks(x, ["Stereotype", "Anti-stereotype", "Unrelated"])
     axes[1].set(title="Recall by reference class", ylabel="Recall", ylim=(0, 1.3))
-    axes[1].legend(fontsize=8, loc="upper left")
+    axes[1].legend(fontsize=12, loc="upper left")
     figure.savefig(figures / "comparison.png", dpi=180)
     plt.close(figure)
     for name, condition in conditions.items():
@@ -315,6 +316,7 @@ no independent-item significance claim is made.
         + r"\input{../report/part_b/discussion.tex}",
     )
     master = master.replace("../report/references.tex", "../report/part_b/references.tex")
+    master = master.replace(r"\appendix", r"\clearpage" + "\n" + r"\appendix")
     master = master.replace(
         r"\input{../report/failure_examples.tex}",
         r"\input{../report/failure_examples.tex}"

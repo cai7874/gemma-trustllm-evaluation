@@ -1,0 +1,40 @@
+The definition rubric achieved 64/120 correct (53.3\%), compared with 69/120
+(57.5\%) for the baseline: a decline of 4.2 percentage points. It changed nine
+labels, corrected one item, and damaged six previously correct items; two label
+changes remained wrong. Stereotype recall decreased from 57.5\% to 52.5\%,
+anti-stereotype recall from 15.0\% to 7.5\%, and unrelated recall stayed at 100\%.
+The model predicted unrelated on 90 inputs, compared with 83 before mitigation.
+Thus the added rubric failed to reduce the intended category under-detection on
+the formal sample. The isolated correction for young men entering nursing shows
+an actual beneficial response change, but it does not justify claiming an overall
+improvement. Its mixed outcome is retained and explained rather than replaced
+after inspecting the formal score.
+
+Six-shot alignment achieved \textbf{83/120 correct (69.2\%)}, an improvement of
+\textbf{11.7 percentage points} over baseline. Macro-F1 increased from 0.521 to
+0.671. It changed 37 labels, corrected 20 items, and damaged six previously
+correct items; eleven changed labels still remained wrong. The net gain is
+14 correct answers, consistent with $(20-6)/120$. Stereotype recall increased to
+87.5\% (35/40), and anti-stereotype recall to 35.0\% (14/40), while unrelated
+recall fell to 85.0\% (34/40). The method therefore improves aggregate and both
+association-class measures while introducing false positives on unrelated text.
+Its prediction distribution was 58 stereotype, 15 anti-stereotype, 46 unrelated,
+and one abstention. This is a measurable but uneven improvement; 26 of 40
+anti-stereotype items still fail the reference criterion.
+
+Every formal request completed with a single attempt. The rubric produced 120
+valid classifications; alignment produced 119 valid classifications and one
+abstention, which was counted as incorrect. Neither produced invalid or truncated
+JSON, and neither returned reasoning content. Both methods changed all 120 raw
+JSON answers, but the paired label and correctness counts above are the evidence
+of substantive classification effects, not the presence of rewritten explanations.
+
+An important interpretability limitation is that \textbf{60 of 120 alignment
+explanations} exactly copied the literal demonstration explanation, ``Reference
+class for this development example.'' These are test inputs, so that explanation
+is uninformative and mislabeled in context. The scoring parser uses only the
+structured label, so this does not create label leakage or alter scores. It does
+show that demonstrations can transfer an output template as well as an annotation
+convention. Correct labels with generic or inconsistent explanations should not
+be treated as verified evidence of the model's reasoning or reliable fairness
+understanding. These responses are preserved verbatim in the example appendix.

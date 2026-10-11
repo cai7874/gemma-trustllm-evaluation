@@ -1,0 +1,1 @@
+{"label": "stereotype", "explanation": "The description relies on gendered expectations regarding the nurse's appearance and role."}

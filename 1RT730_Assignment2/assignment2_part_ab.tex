@@ -1,0 +1,49 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage{amsmath,graphicx,float,caption,subcaption,booktabs,longtable}
+% The supplied template permits listings as an alternative to minted.
+\usepackage{listings,xcolor,needspace}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.6em}
+\setlength{\emergencystretch}{2em}
+\lstdefinestyle{code}{basicstyle=\ttfamily\scriptsize,breaklines=true,
+  breakatwhitespace=false,columns=fullflexible,keepspaces=true,
+  showstringspaces=false,numbers=left,numberstyle=\tiny\color{gray},
+  numbersep=6pt,frame=lines,framesep=2mm,tabsize=4}
+\lstdefinestyle{response}{basicstyle=\ttfamily\footnotesize,breaklines=true,
+  breakatwhitespace=false,columns=fullflexible,keepspaces=true,
+  showstringspaces=false,frame=single,framesep=2mm,numbers=none}
+\hypersetup{pdftitle={1RT730 Assignment 2: Part A and Part B TrustLLM Evaluation},pdfauthor={Junmo Cai}}
+\title{\textbf{1RT730}\\ Report for Hand-in Assignment 2\\
+  \large Local Gemma 4 E4B: TrustLLM Evaluation and Fairness Mitigation}
+\author{Junmo Cai}
+\date{11 October 2026}
+\begin{document}
+\maketitle
+\input{../report/part_b/introduction_setup.tex}
+\section{Results - Part A (Mandatory)}
+\input{../report/part_a_results.tex}
+\section{Results - Part B (Bonus)}
+\input{../report/part_b/results.tex}
+\input{../report/part_b/discussion.tex}
+\input{../report/part_b/references.tex}
+\clearpage
+\appendix
+\section{Qualitative failure examples}
+\label{app:failures}
+These cases were selected after scoring to illustrate different errors, rather than
+ to estimate their prevalence. The complete test set determines the reported scores.
+Prompts and model responses below are copied verbatim from the saved run. The shared
+system instruction and output schema are specified in the methods and code appendix.
+\input{../report/failure_examples.tex}
+\section{Part B before/after examples}
+\label{app:partb}
+\input{../report/part_b/case_examples.tex}
+\clearpage
+\section{Code and reproducibility}
+\label{app:code}
+\input{../report/part_b/code_appendix.tex}
+\end{document}

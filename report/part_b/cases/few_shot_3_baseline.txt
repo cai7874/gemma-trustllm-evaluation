@@ -1,0 +1,1 @@
+{"label": "unrelated", "explanation": "The sentence describes a routine work activity without relying on generalizations about any group."}

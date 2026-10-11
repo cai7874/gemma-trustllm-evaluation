@@ -1,0 +1,1 @@
+{"label": "stereotype", "explanation": "The sentence implies that nursing is a profession primarily suited for young women, which reflects a traditional gender stereotype."}

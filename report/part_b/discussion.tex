@@ -1,0 +1,76 @@
+\section{Discussion and conclusions}
+\subsection{Ethical implications}
+The stereotype task highlights the importance of defining what a fairness detector
+is intended to recognize. A system that only detects explicit generalizations may
+miss implicit occupational or religious associations. Conversely, treating every
+positive portrayal as a stereotype may suppress useful counter-stereotypical
+representation. These classification results support evaluating the detector's
+categories and reviewing concrete errors; they do not establish that the model
+treats all demographic groups equitably in hiring, education, or other decisions.
+
+Robustness matters when users write imperfect English or when an attacker edits
+incoming material. A change in wording can alter a downstream decision even if the
+reference label is unchanged. However, requiring invariance after a real change
+in meaning would also be unsafe. Several selected attacks replace concepts or
+question types, so a changed answer may be a defensible semantic judgment rather
+than a successful manipulation. The reported ASR measures reference-label failures
+in the supplied dataset, and should not be interpreted as a verified rate of
+meaning-preserving attacks against a deployed application.
+
+Moral action classification can reveal whether the model identifies the action,
+actor, and context relevant to a judgment. It remains a test of agreement with a
+dataset's binary judgments, rather than a certificate of moral competence. A refusal
+to judge or an overly broad condemnation can also fail a benchmark without providing
+evidence that the system encourages harmful actions. Explanations are useful for
+inspection but are generated text, not verified accounts of the model's internal
+decision process. Automated ethical decisions would require contextual review and
+accountability beyond these scores.
+
+\subsection{Limitations and future work}
+Only one quantized model, one runtime configuration, and three English subsets were
+evaluated. The study omits other TrustLLM dimensions and other tasks within the
+selected dimensions, as well as multilingual, multimodal, and open-ended behavior.
+The JSON constraint and explanation request change the original evaluation protocol;
+different prompting, thinking settings, or quantization may change results. A single
+run does not estimate variation across seeds or deployments. Prompt-level overlap
+in AdvGLUE and unequal fairness-topic coverage further constrain generalization.
+The public datasets may have appeared in training; no contamination audit was done.
+No confidence intervals are claimed from the correlated paired attack sample.
+
+Reference labels were retained for all scores, including debatable examples. A
+separate human audit of meaning preservation and category clarity would make the
+robustness and fairness results more informative, but changing selected labels
+after observing errors would create a different evaluation. Future studies should
+predefine that audit, group all attacks on a base text when splitting data, sample
+larger topic strata, and compare more model configurations on the same frozen inputs.
+
+This Part A establishes an auditable local baseline: independent requests, saved raw
+outputs, explicit reference mappings, and offline metrics. The principal conclusion
+is that performance depends on both model capability and the task's category and
+perturbation definitions. Aggregate scores should be interpreted alongside the
+confusion matrices and concrete failures, rather than as a single trustworthiness
+rating. No Part B mitigation was applied in this baseline evaluation.
+
+\subsection{Part B interpretation}
+The mitigation comparison evaluates improvements in stereotype recognition under
+the same reference labels. It does not demonstrate reduced bias in open-ended
+generation or equitable decisions about people. The class and topic results show
+where improvement transfers and where errors remain. Prompt-based interventions
+can improve agreement with an annotation convention while amplifying ambiguous
+associations; human review remains necessary for consequential uses.
+
+The initial development attempts, later prompt revisions, and replacement of
+self-review were recorded before formal evaluation. All final test outputs were
+scored once without adjusting either method after observing its test accuracy.
+This was an informed follow-up on previously inspected Part A data, not a blind
+held-out study. A new context-disjoint test set and more model configurations would
+be needed to assess generalization. The 120 fairness items share 110 contexts;
+no independent-item significance claim is made.
+
+\subsection*{Use of generative AI}
+Generative AI assistance (Codex) was used to discuss the evaluation design, implement
+and check the Python scripts, inspect outputs, and prepare this report draft, including Part B mitigation code, development revisions, and comparison analysis. The
+benchmark responses were generated by the local Gemma model under the recorded
+configuration; its generated explanations were not used as an external judge.
+Scores were computed programmatically against saved reference labels. The draft
+includes AI-assisted interpretations of selected failures.
