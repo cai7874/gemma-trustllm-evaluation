@@ -1,0 +1,114 @@
+\subsection{Motivation and experimental control}
+Part B targets stereotype recognition, where the Part A baseline achieved 57.5\%
+accuracy and only 15.0\% anti-stereotype recall. It predicted unrelated on 83 of 120
+inputs. The goal is to recognize relevant social associations rather than treating
+ordinary or implicit descriptions as automatically unrelated. This operational
+goal is narrower than establishing fairness in real decisions or open-ended
+generation.
+
+A clarification from the instructor, supplied by the student, stated that
+improvement is expected: a method that leaves responses unchanged is not sufficient,
+while corrections in some cases and regressions in others are acceptable with
+detailed analysis. Accordingly, the development screen checked actual prediction
+changes and corrections, and the final comparison reports both gains and losses.
+
+The formal experiment reuses precisely the same 120 Part A fairness inputs and
+reference labels, with 40 examples per class. Their original prompts, order,
+model metadata, temperature, token limit, thinking setting, and JSON schema are
+unchanged. Every item is evaluated under each selected method. No test reference
+label, correctness flag, or selected-failure list is supplied to the model. Scoring
+remains automatic reference-label comparison, without an LLM judge or keyword
+rules. Technical failures block scoring; abstentions and malformed/truncated
+answers remain errors. Accuracy changes are reported in percentage points.
+
+\subsection{Development and method selection}
+The existing 30-item fairness development pool was checked by context as well as
+sample ID and complete prompt. Three items shared contexts with the test set:
+\texttt{fairness:139}, \texttt{fairness:854}, and \texttt{fairness:592}. Excluding them
+left 27 development inputs (nine stereotype, eight anti-stereotype, ten unrelated).
+The original Part A test set was retained, rather than changed retrospectively.
+
+The first round evaluated an initial definition template and one-round self-review,
+inspired by same-model refinement~\cite{selfrefine}. The initial definition template
+reduced accuracy from 16/27 to 14/27. Self-review changed 16 raw JSON answers,
+including explanation text, but changed no predicted label and corrected no error;
+accuracy remained 16/27. It was therefore rejected from the formal comparison.
+This result is consistent with treating intrinsic review as a hypothesis rather
+than an automatic improvement; prior work finds limitations in reasoning tasks,
+although that evidence does not directly establish performance on this Gemma
+classification task~\cite{selfcorrect}.
+
+The replacement was in-context alignment. A fixed \texttt{random.Random(44)} shuffle
+selected two development examples per class, in the order stereotype,
+anti-stereotype, unrelated. The six demonstration IDs were
+\texttt{fairness:39}, \texttt{fairness:158}, \texttt{fairness:796},
+\texttt{fairness:720}, \texttt{fairness:651}, and \texttt{fairness:322}.
+Their prompts and reference labels were supplied as examples; these are
+\emph{development} labels, not labels of evaluated test inputs. The six examples
+and their contexts were excluded from validation, leaving 21 inputs (seven
+stereotype, six anti-stereotype, eight unrelated). All 27 development contexts
+are distinct, and all are disjoint from formal test contexts.
+
+The definition template was revised twice on development evidence. On the common
+21-item validation sample, baseline accuracy was 13/21 (61.9\%). The intermediate
+rubric achieved 12/21; the final rubric achieved 13/21 with one correction and one
+regression, and macro-F1 increased from 0.476 to 0.549. Six-shot alignment achieved
+15/21 (71.4\%), with three corrections and one regression. Development used 144
+new generations: 81 for the first round, 42 for the first rubric/alignment
+comparison, and 21 for the last rubric revision. All candidates and outputs were
+retained, including unsuccessful attempts. The 21 validation items had already
+been evaluated in the initial development round; they are a development screen,
+not a newly unseen holdout.
+
+Before formal inference, the chosen prompts, demonstrations, model settings,
+test sample hash, source hashes, baseline response hash, and development comparison
+hash were frozen in \nolinkurl{config/part_b_freeze.json} and committed to Git.
+The run command rejects differences from this freeze. No further prompt revision
+or test-driven method selection was performed after formal outputs were obtained.
+
+\subsection{The two selected mitigation strategies}
+\paragraph{Definition-guided rubric.}
+This method adds an explicit association-based classification procedure to the
+system message. It distinguishes recognizing a social association from deciding
+whether wording is offensive or factually plausible. It asks the model to identify
+the role/group and attributed property, distinguish stereotype from its reversal,
+and consider individual depictions of occupational or family roles. Unrelated is
+reserved for an irrelevant continuation or absence of a relevant association.
+Positive sentiment alone is not equated with anti-stereotype. The conceptual
+motivation comes from StereoSet's contrastive associations~\cite{stereoset}; this
+is still the TrustLLM recognition adaptation rather than the original likelihood
+test. There are no demonstrations, group vocabulary lists, forced label quotas,
+or output overrides in this method. Its exact additional instruction is:
+\lstinputlisting[style=response]{../report/part_b/definition_template.txt}
+
+\paragraph{Six-shot in-context alignment.}
+This method retains the baseline classification instruction and adds six fixed
+user/assistant example pairs before the evaluated input. Each assistant example
+contains its development reference class and the literal explanation
+``Reference class for this development example.'' No invented explanation or
+correctness feedback about the evaluated item is supplied. A brief system
+addition explains that the examples illustrate the benchmark's annotation
+convention. No definition-rubric block or self-review stage is added.
+Few-shot learning through textual demonstrations requires no weight update;
+it is a different mechanism from the definition rubric~\cite{fewshot}.
+Both selected methods use one generation per item and the same output schema.
+Longer input context is included in the measured cost of alignment.
+
+\subsection{Measures and limitations}
+Accuracy and its paired change from baseline are the main outcomes. Macro-F1,
+per-class recall, prediction distribution, confusion matrices, topic accuracy,
+and changes from wrong-to-correct and correct-to-wrong show where each method
+helps or hurts. For 120 matched items, the accuracy change equals
+$(n_{\mathrm{fixed}}-n_{\mathrm{damaged}})/120$. Token usage and measured request
+latency show the computational trade-off. Class recalls prevent presenting a
+method that simply overpredicts one class as an unqualified success.
+
+The test set contains 110 unique contexts, so its items are not fully independent.
+Its Part A results and selected errors had already been inspected; Part B is an
+informed follow-up on the required same subset, not a blind held-out experiment.
+Race, profession, gender, and religion are descriptive topic strata with unequal
+counts; they are not demographic parity groups. No confidence interval or
+independent-item significance claim is made. Source-label ambiguities and public
+training-data contamination remain possible. Improving reference-label agreement
+may reflect learning an annotation convention and does not prove reduced social
+bias across deployment settings.

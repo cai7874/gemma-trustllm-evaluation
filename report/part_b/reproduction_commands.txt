@@ -1,0 +1,21 @@
+# Rebuild the Python 3.12 environment from the committed lockfile.
+uv sync --locked
+
+# Inspect and score the saved formal outputs; these commands are offline.
+uv run a2 --config config/part_b.toml score-fairness --run runs/part_b/definition_template
+uv run a2 --config config/part_b.toml score-fairness --run runs/part_b/few_shot
+uv run a2 --config config/part_b.toml compare-fairness --baseline runs/part_a_baseline --runs runs/part_b/definition_template runs/part_b/few_shot --output report/part_b/comparison.json
+uv run python scripts/build_part_b_report.py
+uv run ruff check src tests scripts
+uv run ruff format --check src tests scripts
+uv run pytest -q
+
+# Compile the combined report, preserving the Part A checkpoint PDF.
+cd 1RT730_Assignment2
+XDG_CACHE_HOME="$PWD/../.cache/tectonic/cache" ../.cache/tectonic/tectonic --keep-logs --outdir ../output/pdf assignment2_part_ab.tex
+cd ..
+
+# To repeat inference, start the same model in LM Studio and use NEW run folders.
+# Run from the project root. The test protocol is already frozen in the repository.
+uv run a2 --config config/part_b.toml mitigate --strategy definition_template --prepared data/prepared/part_b_fairness/test --run runs/part_b/repeated_definition_template
+uv run a2 --config config/part_b.toml mitigate --strategy few_shot --prepared data/prepared/part_b_fairness/test --run runs/part_b/repeated_few_shot

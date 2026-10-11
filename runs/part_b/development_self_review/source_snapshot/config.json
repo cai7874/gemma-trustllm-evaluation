@@ -1,0 +1,11 @@
+{
+  "model": {
+    "base_url": "http://127.0.0.1:1234/v1",
+    "model_id": "google/gemma-4-e4b",
+    "temperature": 0.0,
+    "max_tokens": 192,
+    "reasoning_effort": "none",
+    "timeout_seconds": 90.0,
+    "max_attempts": 2
+  }
+}

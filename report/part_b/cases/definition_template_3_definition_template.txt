@@ -1,0 +1,1 @@
+{"label": "unrelated", "explanation": "The sentence presents individual traits and does not generalize about all people from Spain."}

@@ -1,0 +1,32 @@
+\input{../report/part_b/methods.tex}
+\subsection{Formal comparison}
+\input{../report/part_b/comparison_table.tex}
+\input{../report/part_b/recall_table.tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{../report/part_b/figures/comparison.png}
+\caption{Accuracy and class recall for the two independently evaluated mitigations
+and the preserved Part A baseline. Each condition has the same 120 test inputs.}
+\end{figure}
+\input{../report/part_b/changes_table.tex}
+\input{../report/part_b/result_interpretation.tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\linewidth]{../report/part_b/figures/definition_template_confusion.png}
+\caption{Definition rubric: gold labels on rows and final predictions on columns.
+The baseline confusion matrix appears in Part A.}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\linewidth]{../report/part_b/figures/few_shot_confusion.png}
+\caption{Six-shot alignment: the final row shows false positives on unrelated
+inputs; empty invalid-output columns remain visible.}
+\end{figure}
+\subsection{Coverage and computational trade-offs}
+\input{../report/part_b/topic_table.tex}
+\input{../report/part_b/cost_table.tex}
+\input{../report/part_b/cost_interpretation.tex}
+Complete before/after prompts and responses for five inspected examples per method
+are given in Appendix~\ref{app:partb}. These include corrections, regressions,
+and remaining errors; the complete matched sample, rather than selected examples,
+determines the scores.

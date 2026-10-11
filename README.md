@@ -15,18 +15,18 @@ It does not load model weights or call a hosted inference provider.
 The private backup repository is
 [`cai7874/gemma-trustllm-evaluation`](https://github.com/cai7874/gemma-trustllm-evaluation).
 It includes the implementation, lockfile, configuration, frozen sample manifests,
-raw model responses, scoring exports, report sources, and the compiled Part A PDF.
+raw model responses, scoring exports, report sources, and the compiled Part A and
+combined Part A/B PDFs.
 The environment, model weights, caches, credentials, and downloaded raw datasets are
 excluded. Dataset access remains a prerequisite for downloading the full source data.
 
-- `main` contains the completed, verified Part A checkpoint.
+- `main` contains the completed, verified Part A and Part B work.
 - The annotated `part-a` tag permanently identifies that checkpoint.
-- Part B planning, implementation, and validation take place on `part-b`.
-- Once Part B is completed and validated, merge it into `main` with a merge commit,
-  then create the annotated `part-b` tag on the merged commit. Do not tag an unfinished
-  experiment as complete.
+- The `part-b` branch records Part B planning, implementation, and validation.
+- Part B is merged into `main` with a merge commit; the annotated `part-b` tag
+  identifies that completed checkpoint.
 
-To inspect Part A while Part B is in progress, use `git show part-a:README.md`
+To inspect the preserved Part A checkpoint, use `git show part-a:README.md`
 or browse the `part-a` tag on GitHub. Switching to `part-a` gives a detached HEAD;
 switch back to `part-b` before making development changes.
 
@@ -148,7 +148,8 @@ Report export creates English `report.md`, `metrics.csv`, `metrics.tex`, PNG fig
 and all incorrect cases in `failure_cases.json`. Scoring and export are entirely
 offline and do not generate new model responses.
 
-For the final submission, use `1RT730_Assignment2/assignment2.tex`. Include essential
+The preserved Part A source is `1RT730_Assignment2/assignment2.tex`; the complete
+submission source is `1RT730_Assignment2/assignment2_part_ab.tex`. Include essential
 results and at least five real failure examples per selected subset. Review cases
 manually, and show both original and perturbed responses for robustness examples.
 The export reports a shortfall; it does not fabricate cases or automatically run more
@@ -231,6 +232,74 @@ uv run pytest -q
 Offline tests cover the task-specific gold mappings, disjoint/reproducible sampling,
 pair completeness, ASR's conditional denominator, abstentions, invalid/truncated
 outputs, gold-label leakage, technical failures, and duplicate resume records.
+
+## Part B: fairness mitigation
+
+The final protocol compares a definition-guided rubric with six-shot in-context
+alignment on the **same 120 fairness inputs** as Part A. The local model and
+decoding/output settings are unchanged. Test reference labels remain local;
+six labeled development examples are intentionally supplied only in the six-shot
+method. No external judge, lexical scoring rules, or weight training is used.
+
+Initial self-review did not change any development prediction and was replaced
+before formal evaluation. The initial definition template and two development
+revisions are retained alongside all candidate responses. After removing three
+contexts overlapping the test set, the development pool has 27 items. Six fixed,
+class-balanced demonstrations leave 21 validation items. Development consumed
+144 new generations. The final formal protocol was frozen in
+`config/part_b_freeze.json` before any formal mitigation inference. All 240 formal
+requests completed across the two selected methods, with no technical failures or
+retries. The run command checks the
+frozen source, configuration, sample, demonstration, and baseline hashes.
+
+`docs/part_b_plan.md` records the original proposal and subsequent development
+decisions. The complete English report is built from the supplied LaTeX template
+in `1RT730_Assignment2/assignment2_part_ab.tex`; the Part A-only source and PDF
+remain preserved. All implementation code is included in the combined report,
+so reading the submission does not depend on private repository access.
+
+| Method | Accuracy | Macro-F1 | Anti-stereotype recall |
+| --- | ---: | ---: | ---: |
+| Part A baseline | 57.5% | 0.521 | 15.0% |
+| Definition-guided rubric | 53.3% | 0.463 | 7.5% |
+| Six-shot alignment | 69.2% | 0.671 | 35.0% |
+
+Six-shot alignment corrects 20 baseline errors and regresses on six previously
+correct inputs, producing a net gain of 14/120 (11.7 percentage points). It also
+reduces unrelated recall from 100% to 85%, uses 4.84 times the input tokens, and
+copies an uninformative demonstration explanation in 60/120 responses. The rubric
+corrects one baseline error and introduces six regressions. These outcomes and
+limitations are analyzed with five real cases per strategy. The gain concerns
+stereotype recognition on this subset, not a general reduction of social bias.
+
+The completed English PDF is `output/pdf/assignment2_part_ab.pdf` (61 pages).
+`report/part_b/comparison.json` contains the matched metrics and measured costs;
+`report/part_b/verification.json` records the final checks. Across development and
+formal mitigation runs, Part B records 384 new model generations.
+
+To score and compare saved results offline:
+
+```sh
+uv run a2 --config config/part_b.toml score-fairness --run runs/part_b/definition_template
+uv run a2 --config config/part_b.toml score-fairness --run runs/part_b/few_shot
+uv run a2 --config config/part_b.toml compare-fairness --baseline runs/part_a_baseline --runs runs/part_b/definition_template runs/part_b/few_shot --output report/part_b/comparison.json
+uv run python scripts/build_part_b_report.py
+uv run ruff check src tests scripts
+uv run ruff format --check src tests scripts
+uv run pytest -q
+```
+
+The full reproduction commands, including fresh inference folders, are in
+`report/part_b/reproduction_commands.txt`. Tectonic is excluded from Git as a cached
+binary: install Tectonic 0.17.0 separately, use an existing standard LaTeX setup,
+or upload the source tree to Overleaf. The project-local Tectonic command applies
+to the machine on which these reports were compiled.
+
+The mitigation-specific additions are `mitigations.py` (prompts, development split,
+demonstrations, freeze), `comparison.py` (offline matched metrics and measured
+cost), and a custom-message path in the existing local client. The default Part A
+request construction is preserved and checked by offline tests. Each new run
+archives the inference source and records exact request messages and raw responses.
 
 ## Sources
 

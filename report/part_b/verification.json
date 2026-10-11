@@ -1,0 +1,86 @@
+{
+  "verified_at": "2026-10-11T07:24:14.332994+00:00",
+  "offline_tests": {
+    "passed": 20,
+    "command": ".venv/bin/pytest -q",
+    "note": "Tests passed after the final inference-code changes; subsequent changes affect report rendering and documentation only."
+  },
+  "ruff": {
+    "lint": "passed",
+    "format_check": "passed",
+    "checked_python_files": 17
+  },
+  "original_part_a_files_unchanged": {
+    "output/pdf/assignment2.pdf": "d0319902dd3aad9e0a1bd803bec8cd37eae52acc9dab0ec32ad6545acb5de3ce",
+    "1RT730_Assignment2/assignment2.tex": "01e39074c3a2bdb449129884c3a22aed72956158c03de9fed14407da7d093116",
+    "data/prepared/part_a/samples.jsonl": "3fde9a07c101e2011c01e4ae452972d0017d4da9f4ed3e6cab64f5c82863aed7",
+    "data/prepared/part_a/development.jsonl": "2f68d686e03f4140a8b4376319e2f54b685fa13d3320277693ba553b2d6806ee",
+    "runs/part_a_baseline/responses.jsonl": "688b942597c56056ef996735f88cb9468ea2653b6706cee7d6f249d46ce2c03a",
+    "runs/ethics_commonsense/responses.jsonl": "d3e1eed44b20e2203bc311f2fc0de98672d01c73b6f3cbf42f6fe245a5124898"
+  },
+  "same_test_records_and_order": true,
+  "test_inputs": 120,
+  "unique_test_contexts": 110,
+  "development_test_context_disjoint": true,
+  "demonstrations_validation_context_disjoint": true,
+  "test_reference_labels_not_sent": true,
+  "demonstration_gold_labels_intentionally_sent": true,
+  "freeze_sha256": "fd54a0b9b23710bc84580541de98c9150770ccb8e041b94d6efae86f533a27a3",
+  "frozen_at": "2026-10-11T07:01:51.959934+00:00",
+  "all_inference_sources_match_freeze": true,
+  "part_b_generation_counts": {
+    "definition_template": 120,
+    "development_baseline": 27,
+    "development_definition_template": 27,
+    "development_self_review": 27,
+    "few_shot": 120,
+    "validation_definition_template": 21,
+    "validation_definition_template_v3": 21,
+    "validation_few_shot": 21
+  },
+  "development_generations": 144,
+  "formal_generations": 240,
+  "total_part_b_generations": 384,
+  "technical_failures": 0,
+  "retried_requests": 0,
+  "formal_results": {
+    "definition_template": {
+      "inputs": 120,
+      "correct": 64,
+      "accuracy": 0.5333333333333333,
+      "corrected": 1,
+      "regressed": 6,
+      "changed_labels": 9,
+      "copied_demo_explanations": 0,
+      "responses_sha256": "cf66c907a5a72f4b15493fecb21351cb2e1dc766e31c2cf56d59e2d14a224b45",
+      "started_at": "2026-10-11T07:02:38.233222+00:00",
+      "frozen_inference_verified": true
+    },
+    "few_shot": {
+      "inputs": 120,
+      "correct": 83,
+      "accuracy": 0.6916666666666667,
+      "corrected": 20,
+      "regressed": 6,
+      "changed_labels": 37,
+      "copied_demo_explanations": 60,
+      "responses_sha256": "305e7ec25023316a9d9aa2fc3acd062334cdec41a732f4dc1a8bb46d0253523b",
+      "started_at": "2026-10-11T07:07:34.370904+00:00",
+      "frozen_inference_verified": true
+    }
+  },
+  "verbatim_case_audit": {
+    "cases_per_strategy": 5,
+    "all_prompt_and_response_files_match_records": true
+  },
+  "pdf": {
+    "path": "output/pdf/assignment2_part_ab.pdf",
+    "pages": 61,
+    "sha256": "7a3b36fa924a39f26c8d71c4db29eec17c3483ba8c9666c722c965ecb1e93a36",
+    "compiler": "Tectonic 0.17.0",
+    "compiled_successfully": true,
+    "layout_or_reference_warnings": 0,
+    "all_pages_rendered_and_visually_reviewed": true,
+    "final_layout_change": "Started the qualitative appendix on its own page; re-reviewed changed pages and confirmed remaining pages identical to the reviewed render."
+  }
+}

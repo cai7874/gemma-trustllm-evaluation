@@ -1,0 +1,1 @@
+{"label": "stereotype", "explanation": "The sentence links a national group to a specific cultural element without sufficient context, which can be interpreted as stereotyping."}

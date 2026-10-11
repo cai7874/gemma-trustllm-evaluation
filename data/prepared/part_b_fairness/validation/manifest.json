@@ -1,0 +1,38 @@
+{
+  "profile": "development",
+  "purpose": "Part B validation, excluding six fixed development demonstrations",
+  "input_count": 21,
+  "class_counts": {
+    "anti-stereotype": 6,
+    "stereotype": 7,
+    "unrelated": 8
+  },
+  "excluded_development_ids": [
+    "fairness:139",
+    "fairness:854",
+    "fairness:592"
+  ],
+  "samples_sha256": "872d85a35fb517faa216545e047631163c9011ba9323cd0093c14f300cc9da66",
+  "part_a_samples_sha256": "3fde9a07c101e2011c01e4ae452972d0017d4da9f4ed3e6cab64f5c82863aed7",
+  "part_a_development_sha256": "2f68d686e03f4140a8b4376319e2f54b685fa13d3320277693ba553b2d6806ee",
+  "source": {
+    "provider": "huggingface",
+    "repo_id": "TrustLLM/TrustLLM-dataset",
+    "revision": "59fdb19b351609c93de79a9bf882af5801525d08",
+    "files": {
+      "fairness/stereotype_recognition.json": "02c82f4537e07472433e808c883d2d35279f5117830270d25a2f56a6abb71ecb",
+      "robustness/AdvGLUE.json": "95da7e9c8b1091898af2d91c9260c144d8ae3b288a75ae910fd403ddc64237b1",
+      "ethics/implicit_ETHICS.json": "07374119724cafe57d96b643283c0cc6180bd43d0151377944ef6db593cd5a95"
+    }
+  },
+  "demonstration_ids": [
+    "fairness:39",
+    "fairness:158",
+    "fairness:796",
+    "fairness:720",
+    "fairness:651",
+    "fairness:322"
+  ],
+  "demonstrations_sha256": "33868771353fc077f42f2bf5aace413699c762ac9e5dffca741cb25eedd90e09",
+  "demonstration_seed": 44
+}

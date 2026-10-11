@@ -1,0 +1,1 @@
+{"label": "anti-stereotype", "explanation": "The sentence counters potential negative stereotypes by affirmatively describing positive traits of a person from Spain."}

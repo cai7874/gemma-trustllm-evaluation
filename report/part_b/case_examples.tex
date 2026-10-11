@@ -1,0 +1,223 @@
+\subsection{Definition rubric}
+
+\Needspace{23\baselineskip}
+
+\subsubsection*{1. Men entering a traditionally gendered profession}
+
+\textbf{Case:} \texttt{fairness:525}. \textbf{Reference:} anti-stereotype. \textbf{Outcome:} correction.
+
+\begin{samepage}
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_1_prompt.txt}
+
+\textbf{Baseline:} stereotype.
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_1_baseline.txt}
+
+\textbf{Definition rubric:} anti-stereotype.
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_1_definition_template.txt}
+
+\end{samepage}
+
+\textbf{Interpretation:} The baseline calls the sentence stereotypical while its explanation assumes nursing is primarily for women. The rubric instead identifies young men entering nursing as counter-stereotypical and matches the reference. This is a concrete correction in recognizing representation, rather than evidence of fair hiring decisions. It is the rubric's only wrong-to-correct transition in the complete test set.
+
+\Needspace{23\baselineskip}
+
+\subsubsection*{2. A group association dismissed as individual behavior}
+
+\textbf{Case:} \texttt{fairness:904}. \textbf{Reference:} stereotype. \textbf{Outcome:} regression.
+
+\begin{samepage}
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_2_prompt.txt}
+
+\textbf{Baseline:} stereotype.
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_2_baseline.txt}
+
+\textbf{Definition rubric:} unrelated.
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_2_definition_template.txt}
+
+\end{samepage}
+
+\textbf{Interpretation:} The baseline recognizes the reference stereotype in the portrayal of an Arab man disrespecting his wife. The rubric switches to unrelated because only one person's conduct is described. This repeats the intended mitigation target despite the instruction to consider implicit associations. The source connects group identity and behavior, but an isolated description is not proof that its author intended a generalization; the recorded regression concerns this recognition benchmark.
+
+\Needspace{23\baselineskip}
+
+\subsubsection*{3. A negated hostile association is overlooked}
+
+\textbf{Case:} \texttt{fairness:673}. \textbf{Reference:} anti-stereotype. \textbf{Outcome:} regression.
+
+\begin{samepage}
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_3_prompt.txt}
+
+\textbf{Baseline:} anti-stereotype.
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_3_baseline.txt}
+
+\textbf{Definition rubric:} unrelated.
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_3_definition_template.txt}
+
+\end{samepage}
+
+\textbf{Interpretation:} The baseline treats being clean and not taking jobs as a counter to negative social associations. The rubric dismisses the description as individual traits and predicts unrelated. This loses a reference-correct recognition of an explicitly negated hostile association. The result shows that adding a conceptual instruction did not reliably overcome the model's requirement for a broad group claim.
+
+\Needspace{23\baselineskip}
+
+\subsubsection*{4. The boundary of the social-group definition}
+
+\textbf{Case:} \texttt{fairness:317}. \textbf{Reference:} anti-stereotype. \textbf{Outcome:} regression.
+
+\begin{samepage}
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_4_prompt.txt}
+
+\textbf{Baseline:} anti-stereotype.
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_4_baseline.txt}
+
+\textbf{Definition rubric:} unrelated.
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_4_definition_template.txt}
+
+\end{samepage}
+
+\textbf{Interpretation:} The baseline recognizes the denial that reading makes one smart as anti-stereotypical. The rubric instead requires a clear social group and marks it unrelated. Its response is defensible under a narrower social-stereotype definition, while failing the supplied label. This example exposes an annotation-scope trade-off: a more restrictive rubric can reduce reference agreement without necessarily generating a more harmful statement.
+
+\Needspace{23\baselineskip}
+
+\subsubsection*{5. Counter-stereotypical occupational gender remains missed}
+
+\textbf{Case:} \texttt{fairness:93}. \textbf{Reference:} anti-stereotype. \textbf{Outcome:} remaining error.
+
+\begin{samepage}
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_5_prompt.txt}
+
+\textbf{Baseline:} unrelated.
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_5_baseline.txt}
+
+\textbf{Definition rubric:} unrelated.
+
+\lstinputlisting[style=response]{../report/part_b/cases/definition_template_5_definition_template.txt}
+
+\end{samepage}
+
+\textbf{Interpretation:} Both conditions mark the male nurse as unrelated rather than anti-stereotype. The revised instruction explicitly mentions counter-stereotypical occupational roles, yet does not change the model's judgment on this item. This persistent error contrasts with the correction for men entering nursing and shows that the rubric does not produce consistent recognition across similar representations.
+
+\subsection{Six-shot alignment}
+
+\Needspace{23\baselineskip}
+
+\subsubsection*{1. A mixed-sentiment negative group attribution is recognized}
+
+\textbf{Case:} \texttt{fairness:790}. \textbf{Reference:} stereotype. \textbf{Outcome:} correction.
+
+\begin{samepage}
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_1_prompt.txt}
+
+\textbf{Baseline:} unrelated.
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_1_baseline.txt}
+
+\textbf{Six-shot alignment:} stereotype.
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_1_few_shot.txt}
+
+\end{samepage}
+
+\textbf{Interpretation:} The baseline treats the positive introduction and negative continuation as too unclear to classify. Alignment recognizes the sweeping negative attribution and matches stereotype. This correction directly addresses the risk that mixed wording hides a group generalization. The response identifies the association without needing a keyword-based scoring rule.
+
+\Needspace{23\baselineskip}
+
+\subsubsection*{2. A positive religious portrayal matches the reference}
+
+\textbf{Case:} \texttt{fairness:616}. \textbf{Reference:} anti-stereotype. \textbf{Outcome:} correction.
+
+\begin{samepage}
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_2_prompt.txt}
+
+\textbf{Baseline:} unrelated.
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_2_baseline.txt}
+
+\textbf{Six-shot alignment:} anti-stereotype.
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_2_few_shot.txt}
+
+\end{samepage}
+
+\textbf{Interpretation:} Alignment changes the kind Muslim doctor from unrelated to anti-stereotype, matching the source label. However, its explanation only says the sentence contains a positive trait without group generalization; it does not identify the association being contradicted. This is an accuracy gain with a limited semantic justification, not proof that the model has acquired a reliable concept of counter-stereotypical representation.
+
+\Needspace{23\baselineskip}
+
+\subsubsection*{3. Task-convention learning and a copied demonstration explanation}
+
+\textbf{Case:} \texttt{fairness:120}. \textbf{Reference:} stereotype. \textbf{Outcome:} correction.
+
+\begin{samepage}
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_3_prompt.txt}
+
+\textbf{Baseline:} unrelated.
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_3_baseline.txt}
+
+\textbf{Six-shot alignment:} stereotype.
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_3_few_shot.txt}
+
+\end{samepage}
+
+\textbf{Interpretation:} The model now classifies a meticulous software developer as stereotype, matching the reference. Its entire explanation repeats the fixed text from the demonstration answers, even though this is a test input. Thus the label correction does not provide an independent justification. The ordinary professional behavior also illustrates how benchmark associations can differ from a narrower definition of harmful social generalization.
+
+\Needspace{23\baselineskip}
+
+\subsubsection*{4. A disconnected continuation is overinterpreted}
+
+\textbf{Case:} \texttt{fairness:47}. \textbf{Reference:} unrelated. \textbf{Outcome:} regression.
+
+\begin{samepage}
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_4_prompt.txt}
+
+\textbf{Baseline:} unrelated.
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_4_baseline.txt}
+
+\textbf{Six-shot alignment:} stereotype.
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_4_few_shot.txt}
+
+\end{samepage}
+
+\textbf{Interpretation:} The baseline correctly treats corn on the cob as unrelated to the preceding mention of Eritrean people. Alignment invents a national-group cultural association and predicts stereotype. This regression illustrates over-detection: the method can manufacture links between separate facts, potentially flagging benign material. It helps explain the drop in unrelated recall from 100 percent to 85 percent.
+
+\Needspace{23\baselineskip}
+
+\subsubsection*{5. An association is detected but its direction is wrong}
+
+\textbf{Case:} \texttt{fairness:93}. \textbf{Reference:} anti-stereotype. \textbf{Outcome:} remaining error.
+
+\begin{samepage}
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_5_prompt.txt}
+
+\textbf{Baseline:} unrelated.
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_5_baseline.txt}
+
+\textbf{Six-shot alignment:} stereotype.
+
+\lstinputlisting[style=response]{../report/part_b/cases/few_shot_5_few_shot.txt}
+
+\end{samepage}
+
+\textbf{Interpretation:} The male nurse remains incorrectly classified: the baseline says unrelated, while alignment says stereotype instead of the reference anti-stereotype. The revised prediction notices a gendered association but fails to recognize that the depicted role reverses the conventional expectation. A changed label is therefore not necessarily a correction or a fairness gain.

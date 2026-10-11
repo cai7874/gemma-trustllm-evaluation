@@ -1,0 +1,150 @@
+\section{Introduction}
+An LLM can produce plausible language while misclassifying social stereotypes,
+changing its answer after a small input perturbation, or judging a morally relevant
+action incorrectly. These failures matter when users depend on the model to interpret
+people, documents, or requests. Part A evaluates one locally deployed open-weight
+model using three subsets of TrustLLM: fairness, adversarial robustness, and machine
+ethics. TrustLLM provides a common framework and task-specific datasets for studying
+these dimensions~\cite{trustllm}.
+
+The chosen tasks have reference labels, enabling automatic scoring without an external
+LLM judge or hand-written keyword rules. Stereotype recognition tests the classification
+of social associations; paired AdvGLUE examples test answer stability under adversarial
+edits; ETHICS action-judgment examples test judgments about actions. Each is a limited
+operational measure of a trust dimension. Recognizing a stereotype is different from
+demonstrating equitable behavior in a real decision.
+
+\section{Model and set-up}
+\subsection{Local deployment and environment}
+The evaluated endpoint was \texttt{google/gemma-4-e4b} in LM Studio 0.4.26+4 on an
+Apple M4 computer with 16 GiB memory and macOS 27.0.1 (arm64). The server reported
+architecture \texttt{gemma4}, MLX format, variant
+\texttt{google/gemma-4-e4b@4bit}, four bits per weight, and a model file size of
+6,861,915,950 bytes. The configured context window was 8,192 tokens. Google's E4B
+model card describes 4.5 billion effective parameters and approximately 8 billion
+including embeddings~\cite{gemma}; the local server's rounded \texttt{4B} metadata
+should not be interpreted as its full parameter count. The exact upstream revision
+and a hash of the local weights were not exposed by the recorded model metadata.
+
+Inference used the local endpoint \texttt{http://127.0.0.1:1234/v1}, through the
+OpenAI-compatible client protocol supported by LM Studio~\cite{lmstudio}. No remote
+inference provider or additional moderation service was called. The model's own
+instruction tuning remains part of the evaluated system. In Part A, each input was an independent
+single-turn request, with temperature 0, maximum 192 output tokens,
+\texttt{reasoning\_effort="none"}, and a 90-second timeout. Temperature 0 limits
+sampling variation but does not establish bitwise reproducibility across runtimes.
+No top-p or top-k override was supplied; server defaults were used.
+
+Python 3.12.14 ran in a project-local \texttt{.venv} managed by uv~\cite{uv}.
+The lockfile fixes the installed dependencies. Recorded packages were
+\texttt{openai} 3.28.0, \texttt{huggingface-hub} 2.2.0, pandas 3.0.6,
+scikit-learn 1.9.1, and Matplotlib 3.11.2~\cite{software,hf}.
+The implementation separates download/sampling, prompts, inference persistence,
+and offline scoring. Complete code is included in Appendix~\ref{app:code}.
+
+\subsection{Data structure and sampling}
+The three JSON files were downloaded through the authenticated Hugging Face Hub
+client from \texttt{TrustLLM/TrustLLM-dataset}, pinned to revision
+\nolinkurl{59fdb19b351609c93de79a9bf882af5801525d08}~\cite{hfdata}.
+Each file has its own schema; none was forced into a shared dataset loader.
+\begin{table}[H]
+\centering\small
+\begin{tabular}{p{2.4cm}p{4.0cm}p{4.5cm}r}
+\toprule
+Dimension & Subset & Reference label and metadata & Test inputs\\
+\midrule
+Fairness & \texttt{stereotype\_recognition} & Three classes; topic, sentence, context & 120\\
+Robustness & \texttt{AdvGLUE} & Numeric task label; pair index, variant, attack method & 240\\
+Machine ethics & \texttt{implicit\_ETHICS} & \texttt{wrong}/\texttt{not wrong}; input, topic & 120\\
+\bottomrule
+\end{tabular}
+\caption{Selected TrustLLM subsets. Robustness comprises 120 complete pairs.}
+\end{table}
+
+The \texttt{prompt} field was sent verbatim as the user message. The \texttt{label}
+field supplied the local reference answer and was never sent to the model.
+Fairness \texttt{sentence}/\texttt{context} and ETHICS \texttt{input} retain the
+underlying text for inspection; their \texttt{type}/\texttt{topic} fields describe
+coverage. In AdvGLUE, \texttt{task} controls the label vocabulary;
+\texttt{index} and \texttt{type} identify original/modified partners;
+\texttt{method} and \texttt{data construction} describe perturbations. Full source
+records are retained locally for auditing.
+
+The downloaded pools contained 1,000 fairness rows, 912 AdvGLUE rows (456 complete
+pairs), and 500 ETHICS rows (250 commonsense and 250 justice). The initial ETHICS
+sample contained 59 commonsense and 61 justice examples. Python's
+\texttt{random.Random(44)} shuffled each
+classification label stratum or robustness task stratum. Before any smoke inference,
+the procedure reserved a development pool of 30 fairness inputs, 20 ETHICS inputs,
+and 12 robustness pairs; formal samples were drawn from the remaining rows in each
+stratum. The smoke test used only 13 development inputs. Formal and development
+sample IDs have zero overlap; robustness partners always stay in the same split.
+No model training or prompt tuning on the formal set was performed. After the first
+480-input run, a source audit identified incompatible task and label semantics in
+the justice portion, as detailed in the ethics results. A second sample therefore
+selected 120 commonsense-only ETHICS rows, balanced at 60 per label, with seed 44
+and all original development IDs excluded. The selection did not depend on which
+individual outputs were correct. Twenty-six rows overlap the first mixed test, but
+all 120 were requested again in the documented refinement. Model settings, system
+instructions, user prompts, and source labels were unchanged.
+
+The primary reported sample contains 40 examples per fairness class, 60 per
+commonsense ETHICS class,
+and 30 AdvGLUE pairs for each of MNLI, QNLI, QQP, and SST-2. This yields 480 inputs
+and 120 paired attack cases. The robustness set contains 211 distinct prompts,
+satisfying at least 100 samples per dimension even after exact prompt deduplication.
+The additional initial mixed-topic ETHICS run is retained as a diagnostic; the
+Part A generated 600 responses in total, with 480 inputs contributing to the
+primary three-dimension results. The ethics refinement was a disclosed post-run
+measurement correction, rather than a preregistered blind test or a Part B mitigation.
+Balancing keeps each class or task visible
+within the available compute budget. These are stratified subset scores, rather
+than estimates weighted to the full dataset's natural distribution. Fairness topics
+were not stratified jointly: race 50, profession 46, gender 17, and religion 7.
+Small topic strata limit group comparisons. Related classification contexts were
+not explicitly grouped, so different row IDs do not guarantee semantic independence.
+AdvGLUE reuses base examples for different attacks: the formal set has 91 distinct
+original prompts (MNLI 23, QNLI 26, QQP 20, SST-2 22), and four exact prompts also
+occur in the development pool. Thus the split separates attack-pair IDs, rather
+than guaranteeing a holdout of all base texts. No prompts or settings were tuned
+on these repeated texts. The pair-weighted robustness scores give more weight to
+base texts represented by multiple attacks; they are not independent observations.
+StereoSet underlies the stereotype task; AdvGLUE and ETHICS provide the other selected
+material~\cite{stereoset,advglue,ethics}.
+
+\subsection{Output protocol and metric definitions}
+The shared system instruction requests English JSON with exactly two fields:
+\texttt{label} and a short \texttt{explanation}. LM Studio receives a JSON schema
+whose label enum contains the task's allowed classes plus \texttt{abstain}.
+For fairness, the system maps the prompt's numbered options to stereotype,
+anti-stereotype, and unrelated. For robustness the numeric references are decoded
+as follows: SST-2 0/1 = negative/positive; QQP 0/1 = no/yes;
+QNLI 0/1 = yes/no; MNLI 0/1/2 = yes/maybe/no. QNLI and QQP deliberately use different
+positive-class encodings.
+
+The original user prompt is unchanged, including its legacy output instruction,
+but the higher-priority system instruction explicitly replaces that format with
+JSON. The explanation is not used to infer the label. Parsing requires valid JSON,
+the exact field names and types, an allowed label, and a completed
+\texttt{finish\_reason="stop"}. Abstentions, invalid output, and truncation count
+as incorrect in the full denominator. Technical failures block scoring. Only
+connection errors, timeouts, HTTP 429, or server errors may be retried, at most twice;
+semantic mistakes are never retried. This adapted protocol changes both format and
+generation behavior, so it does not reproduce the official TrustLLM leaderboard.
+
+For fairness, accuracy is the proportion matching the reference class, and macro-F1
+is the unweighted mean of the three class F1 scores. For machine ethics, accuracy,
+macro-F1, and balanced accuracy (the mean recall of \texttt{wrong} and
+\texttt{not wrong}) are reported. Confusion matrices include abstention and invalid
+prediction columns. For robustness, let $o_i$ and $m_i$ indicate correctness on
+the original and modified inputs of pair $i$, with $N=120$:
+\[
+ A_{\mathrm{orig}}=\frac{\sum_i o_i}{N},\qquad
+ A_{\mathrm{mod}}=\frac{\sum_i m_i}{N},\qquad
+ \Delta=A_{\mathrm{orig}}-A_{\mathrm{mod}},\qquad
+ \mathrm{ASR}=\frac{\sum_i o_i(1-m_i)}{\sum_i o_i}.
+\]
+Attack success rate (ASR) conditions on originally correct cases. If its denominator
+is zero, it is undefined. Wrong-to-correct transitions are reported separately;
+they can offset the aggregate accuracy drop. No combined trustworthiness score is
+computed across these distinct tasks.

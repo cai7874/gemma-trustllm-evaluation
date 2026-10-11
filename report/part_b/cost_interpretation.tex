@@ -1,0 +1,22 @@
+Alignment improved descriptive accuracy for race (60.0\% to 70.0\%), profession
+(54.3\% to 71.7\%), and gender (64.7\% to 70.6\%); religion remained at 42.9\%
+(3/7). These are small, differently composed topic samples. In particular,
+unchanged accuracy in seven religion items neither establishes equivalence nor
+supports a broad conclusion about religious fairness.
+
+The rubric required 59,384 input tokens, approximately 2.46 times baseline's
+24,104; alignment required 116,744, approximately 4.84 times baseline. Mean
+request latency increased from 1.82 seconds to 2.47 seconds for the rubric and
+2.19 seconds for alignment (approximately 35.8\% and 20.4\% increases). Alignment
+generated fewer output tokens (2,810 versus baseline's 3,741), with many short
+copied explanations. These are measured sequential timings, including client
+overhead and potential runtime caching effects, rather than a controlled throughput
+benchmark. More input tokens did not translate proportionally to latency in these
+runs, and no causal claim is made about the reason.
+
+The two formal mitigation runs generated 240 responses with no retries or request
+failures. Together with the 144 development generations, Part B added 384 saved
+responses. The 600 Part A experiment responses remain preserved separately.
+All metrics and comparisons were computed offline after saving raw outputs.
+No test-set relabeling, answer selection using correctness, or post-test prompt
+revision was used to obtain the reported improvement.

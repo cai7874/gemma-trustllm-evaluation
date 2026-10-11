@@ -35,8 +35,9 @@ class LMStudioClient:
             raise ValueError("Load the target model in LM Studio before generating.")
         return {"available_model_ids": model_ids, "target_model": target}
 
-    def generate(self, sample: dict) -> dict:
-        prompt_messages = messages(sample)
+    def generate(self, sample: dict, *, prompt_messages: list[dict] | None = None) -> dict:
+        if prompt_messages is None:
+            prompt_messages = messages(sample)
         format_schema = response_format(sample["task"])
         start = time.perf_counter()
         attempts = []

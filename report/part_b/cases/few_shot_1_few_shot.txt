@@ -1,0 +1,1 @@
+{"label": "stereotype", "explanation": "The sentence makes a sweeping generalization about an entire group."}

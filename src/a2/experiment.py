@@ -23,7 +23,19 @@ def validate_existing(records: list[dict], samples: list[dict]) -> set[str]:
     return set(ids)
 
 
-def generate(config: dict, prepared_dir: Path, run_dir: Path, resume: bool) -> dict:
+def generate(
+    config: dict,
+    prepared_dir: Path,
+    run_dir: Path,
+    resume: bool,
+    *,
+    strategy: str = "baseline",
+    parent_dir: Path | None = None,
+) -> dict:
+    from a2.mitigations import STRATEGIES, load_parent, mitigation_messages, validate_freeze
+
+    if strategy not in STRATEGIES:
+        raise ValueError(f"Unknown strategy: {strategy}")
     samples = read_jsonl(prepared_dir / "samples.jsonl")
     if not samples:
         raise ValueError("No prepared samples found.")
@@ -39,6 +51,26 @@ def generate(config: dict, prepared_dir: Path, run_dir: Path, resume: bool) -> d
             path.name: sha256(path) for path in sorted(Path(__file__).parent.glob("*.py"))
         },
     }
+    parent_records = {}
+    demonstrations = None
+    if strategy != "baseline":
+        identity["strategy"] = strategy
+    if strategy == "self_review":
+        if parent_dir is None:
+            raise ValueError("Self-review requires a baseline parent run.")
+        parent_records = load_parent(parent_dir, samples, config["model"])
+        identity["parent_responses_sha256"] = sha256(parent_dir / "responses.jsonl")
+        identity["parent_run"] = str(parent_dir)
+    elif parent_dir is not None:
+        raise ValueError("Only self-review accepts a parent run.")
+    if strategy == "few_shot":
+        demo_path = Path(config["part_b"]["demonstrations_path"])
+        demonstrations = json.loads(demo_path.read_text())
+        identity["demonstrations_sha256"] = sha256(demo_path)
+    freeze = None
+    if prepared_manifest["profile"] == "test":
+        freeze = validate_freeze(config, identity, strategy)
+        identity["experiment_freeze_sha256"] = sha256(Path(config["part_b"]["freeze_path"]))
     manifest_path = run_dir / "run.json"
     if run_dir.exists():
         if not resume or not manifest_path.exists():
@@ -68,6 +100,10 @@ def generate(config: dict, prepared_dir: Path, run_dir: Path, resume: bool) -> d
         }
     client = LMStudioClient(config["model"])
     connection = client.connection_info()
+    if parent_dir is not None:
+        parent_manifest = json.loads((parent_dir / "run.json").read_text())
+        if connection["target_model"] != parent_manifest["connection"]["target_model"]:
+            raise ValueError("Review model metadata differs from its baseline parent.")
     if (
         "connection" in manifest
         and connection["target_model"] != manifest["connection"]["target_model"]
@@ -76,6 +112,15 @@ def generate(config: dict, prepared_dir: Path, run_dir: Path, resume: bool) -> d
     manifest["connection"] = connection
     write_json(manifest_path, manifest)
     write_json(run_dir / "samples.json", samples)
+    snapshot = run_dir / "source_snapshot"
+    snapshot.mkdir(exist_ok=True)
+    for path in sorted(Path(__file__).parent.glob("*.py")):
+        (snapshot / path.name).write_bytes(path.read_bytes())
+    write_json(snapshot / "config.json", config)
+    if freeze is not None:
+        write_json(snapshot / "experiment_freeze.json", freeze)
+    if demonstrations is not None:
+        write_json(snapshot / "demonstrations.json", demonstrations)
     response_path = run_dir / "responses.jsonl"
     existing = read_jsonl(response_path)
     seen = validate_existing(existing, samples)
@@ -85,7 +130,15 @@ def generate(config: dict, prepared_dir: Path, run_dir: Path, resume: bool) -> d
         )
     pending = [sample for sample in samples if sample["id"] not in seen]
     for sample in tqdm(pending, desc="Generating", unit="input"):
-        result = client.generate(sample)
+        parent = parent_records.get(sample["id"])
+        result = client.generate(
+            sample, prompt_messages=mitigation_messages(sample, strategy, parent, demonstrations)
+        )
+        if strategy != "baseline":
+            result["strategy"] = strategy
+        if parent is not None:
+            result["parent_sample_id"] = parent["sample_id"]
+            result["parent_answer"] = parent["response"]["choices"][0]["message"]["content"]
         # Closing the append operation after each input makes completed work durable.
         with response_path.open("a") as file:
             file.write(json.dumps(result, ensure_ascii=False) + "\n")

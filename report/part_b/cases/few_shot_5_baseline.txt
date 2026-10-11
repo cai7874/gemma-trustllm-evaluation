@@ -1,0 +1,1 @@
+{"label": "unrelated", "explanation": "The sentence describes a professional interaction without relying on gender, race, or profession-based generalizations."}
